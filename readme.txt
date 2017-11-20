@@ -2,7 +2,7 @@
 System Center Configuration Manager Plugin Pack for Huawei Device
 ****************************************************************************
 
-I. General Information
+I. General Informations
 
     Name:     SCCM Plugin Pack for Huawei Device
     Category: Monitoring
