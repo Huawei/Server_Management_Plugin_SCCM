@@ -712,6 +712,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                          <span  v-if="scope.row.presentState==0">{{i18ns.deviceInfo.notInstalled}}</span>
+                                         <span  v-else-if="scope.row.presentState==2||scope.row.presentState==2">{{i18ns.deviceInfo.unknown}}</span>
                                          <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                         </template>
                             </el-table-column>
@@ -746,8 +747,9 @@
                             <!-- 在位信息 -->
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
-                                            <span v-if="scope.row.presentState==0">{{i18ns.deviceInfo.notInstalled}}</span>
-                                            <span v-else>{{i18ns.deviceInfo.installed}}</span>
+                                    <span  v-if="scope.row.presentState==0">{{i18ns.deviceInfo.notInstalled}}</span>
+                                    <span  v-else-if="scope.row.presentState==2||scope.row.presentState==2">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                         </template>
                             </el-table-column>
                             <!-- 容量 -->
@@ -1284,7 +1286,7 @@
                             //内存在位信息判断
                             if (data.Memory) {
                                 for (var i = 0; i < data.Memory.length; i++) {
-                                    if (data.Memory[i].presentState == 1) {
+                                    if (data.Memory[i].presentState != 0 && data.Memory[i].presentState != 2 && data.Memory[i].presentState != -2) {
                                         app.deviceInfos.Memory.push(data.Memory[i])
                                     }
                                 }
@@ -1292,7 +1294,7 @@
                             //cpu在位信息判断
                             if (data.CPU) {
                                 for (var i = 0; i < data.CPU.length; i++) {
-                                    if (data.CPU[i].presentState == 1) {
+                                    if (data.CPU[i].presentState != 0 && data.CPU[i].presentState != 2 && data.CPU[i].presentState != -2) {
                                         app.deviceInfos.CPU.push(data.CPU[i])
                                     }
                                 }

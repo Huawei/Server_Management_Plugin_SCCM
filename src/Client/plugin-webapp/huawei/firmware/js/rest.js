@@ -104,7 +104,8 @@ var firmwareManage = {
 					console.log(resultJson);
 
 					var ret = { code: resultJson.code, msg: resultJson.description, data: resultJson.data }
-					dealResult(ret, callback);
+					//dealResult(ret, callback);
+					callback(ret);
 				});
     }
 };
@@ -136,7 +137,8 @@ var firmwareTaskManage = {
 					console.log(result);
 
 					var ret = { code: result.code, msg: result.description, data: result.data }
-					dealResult(ret, callback);
+					//dealResult(ret, callback);
+					callback(ret);
 				});	
     },
     //获取服务器列表
