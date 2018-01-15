@@ -779,12 +779,12 @@
                  * 
                  * @returns 
                  */
-                save: function(_firmwareList) {
+                save: function() {
                     var param = {
                         esight: this.currentESight,
                         param: {
                             basepackageName: this.firmwareName,
-                            firmwareList: _firmwareList,
+                            firmwareList: this.firmwareTypes.join(';'),
                             isforceupgrade: this.isforceupgrade,
                             effectiveMethod: parseInt(this.effectiveMethod),
                             dn: this.selectServers.map(function(i) {
