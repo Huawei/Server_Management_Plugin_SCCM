@@ -539,7 +539,8 @@
                                         "esight": app.currentESight,
                                         "param": {
                                             "taskName": row.taskName,
-                                            "dn": encodeURI(dn_arry[agr])
+                                            "dn": encodeURI(dn_arry[agr]),
+                                            'i': i
                                         }
                                     }
                                     firmwareTaskManage.getDeviceTaskInfo(param, function(ret) {

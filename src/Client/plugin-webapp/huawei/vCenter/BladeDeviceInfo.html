@@ -748,14 +748,23 @@
                                     obj.mezzETHMac.push(item);
                                     break;
                                 case "1":
-                                    obj.mezzIBMac.push(item);
+                                    obj.mezzFCWWPN.push(item);
                                     break;
                                 case "2":
-                                    obj.mezzFCWWPN.push(item);
+                                    obj.mezzIBMac.push(item);
                                     break;
                                 default:
                                     break;
                             }
+                        }
+                        if (obj.mezzETHMac.length == 0) {
+                            obj.mezzETHMac = ['--']
+                        }
+                        if (obj.mezzIBMac.length == 0) {
+                            obj.mezzIBMac = ['--']
+                        }
+                        if (obj.mezzFCWWPN.length == 0) {
+                            obj.mezzFCWWPN = ['--']
                         }
                     }
                     return obj;
