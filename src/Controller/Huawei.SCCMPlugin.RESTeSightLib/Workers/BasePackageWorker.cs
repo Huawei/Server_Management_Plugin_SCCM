@@ -309,7 +309,6 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
             StringBuilder sb = new StringBuilder(ConstMgr.HWESightHost.URL_TASK_PROGRESS_BASEPACKAGE);
             sb.Append("?taskName=").Append(HttpUtility.UrlEncode(taskName, Encoding.UTF8));
             JObject jResult = ESSession.HCGet(sb.ToString());
-            CheckAndThrowException(jResult);
             try
             {
               CheckAndThrowException(jResult);
