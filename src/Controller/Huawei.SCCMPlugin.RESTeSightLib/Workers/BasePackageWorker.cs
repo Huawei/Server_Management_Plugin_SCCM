@@ -310,6 +310,20 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
             sb.Append("?taskName=").Append(HttpUtility.UrlEncode(taskName, Encoding.UTF8));
             JObject jResult = ESSession.HCGet(sb.ToString());
             CheckAndThrowException(jResult);
+            try
+            {
+              CheckAndThrowException(jResult);
+            }
+            catch (BasePackageExpceion de)
+            {
+              if (de.Code == "10000")//{"code":10000,"data":null,"resverd":null,"description":"task is not exist."} 
+              {
+                LogUtil.HWLogger.API.Error(de);
+                SaveUnkownDeployProgressToDB(taskName);
+              }
+              else
+                throw;
+            }
             QueryObjectResult<DeployPackageTaskDetail> queryObjectResult = jResult.ToObject<QueryObjectResult<DeployPackageTaskDetail>>();
             //sync to the database.
             HWESightTask hwtask = HWESightTaskDal.Instance.FindTaskByName(this.ESSession.HWESightHost.ID, taskName);
@@ -337,7 +351,15 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
             }
             return queryObjectResult;
         }
-
+        private void SaveUnkownDeployProgressToDB(string taskName)
+        {
+          //sync to the database.
+          HWESightTask hwtask = HWESightTaskDal.Instance.FindTaskByName(this.ESSession.HWESightHost.ID, taskName);
+          hwtask.LastModifyTime = System.DateTime.Now;
+          hwtask.TaskProgress = 100;     
+          hwtask.SyncStatus = ConstMgr.HWESightTask.SYNC_STATUS_HW_FAILED;
+          HWESightTaskDal.Instance.UpdateEntity(hwtask);
+        }
         private void SaveDeployProgressToDB(QueryObjectResult<DeployPackageTaskDetail> queryObjectResult, string taskName)
         {
             //sync to the database.
