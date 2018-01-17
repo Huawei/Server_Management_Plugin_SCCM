@@ -319,7 +319,8 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
               {
                 LogUtil.HWLogger.API.Error(de);
                 SaveUnkownDeployProgressToDB(taskName);
-              }
+                return null;
+        }
               else
                 throw;
             }
