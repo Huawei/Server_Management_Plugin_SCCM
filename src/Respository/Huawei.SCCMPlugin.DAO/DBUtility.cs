@@ -39,7 +39,7 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 using (var mutex = new System.Threading.Mutex(false, "huawei.sccmplugin.db"))
                 {
-                    if (mutex.WaitOne(TimeSpan.FromSeconds(60), false))
+                    if (mutex.WaitOne(TimeSpan.FromSeconds(600), false))
                     {
                         var localPath = System.Environment.GetEnvironmentVariable("userprofile");//C:\Users\Public\Huawei\SCCM Plugin
 
