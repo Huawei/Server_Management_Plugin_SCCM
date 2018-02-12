@@ -38,7 +38,8 @@ var manager = {
 					console.log(result);
 
 					var ret = { code: result.code, msg: result.description, data: result.data }
-					dealResult(ret, cb);
+					//dealResult(ret, cb);
+					cb(ret);
 				});	
     },
     //获取模板列表

@@ -336,7 +336,8 @@ var softManager = {
 					console.log(result);
 
 					var ret = { code: result.code, msg: result.description }
-					dealResult(ret, callback);
+					//dealResult(ret, callback);
+					callback(ret);
 				});	
     },
     //清空失败任务的操作

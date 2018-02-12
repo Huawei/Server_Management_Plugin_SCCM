@@ -31,7 +31,8 @@ var i18n_en = {
         operation: 'Operation',
         name: 'Name',
         required: "Required",
-        refresh: 'Refresh'
+        refresh: 'Refresh',
+        deleteResultTips: '# successful, & failed'
     },
     template: {
         templateOptin: { value: '', label: 'All template' },
@@ -78,7 +79,7 @@ var i18n_en = {
         beforeColsePageTips: 'Confirm close window?',
         capacityErrorRangeC: ' The capacity of drive C ranges from 32\,000 MB to 2\,000\,000 MB\, or from 32 GB to 2000 GB.',
         capacityErrorFat32: 'The capacity range for the FAT32 file system is 100 MB to 32000 MB or 1 GB to 32 GB\, and the free capacity cannot be used.',
-        capacityErrorOther: 'he capacity range for the NTFS file system in Windows or a non-root partition in Linux is 100 MB to 999999 MB or 1 GB to 1000 GB.',
+        capacityErrorOther: 'The capacity range for the NTFS file system in Windows or a non-root partition in Linux is 100 MB to 999999 MB or 1 GB to 1000 GB.',
         capacityErrorRoot: 'The root directory capacity ranges from 10\,000 MB to 999\,999 MB or 10 GB to 1000 GB.',
         setBootOrder: 'Set the system boot order.',
         choiceSoftware: 'Select Software Source',
@@ -324,7 +325,10 @@ var i18n_en = {
         getDNInfoTips: 'Getting the upgrade details for the device',
         serverName: 'Name',
         deivceFirmwareTips: 'If the device firmware or driver does not have a matching upgrade package, the firmware information is not displayed on the task upgrade list.',
-        selectFirmwareTips: 'Please select firmware with the same upgrade mode.'
+        selectFirmwareTips: 'Please select firmware with the same upgrade mode.',
+        highRisk: 'High Risk',
+        highRiskTips1: 'Automatic restart may cause service interruption. Manual restart requires you to manually restart the server after the update for the update to take effect.',
+        agreeTip: 'I have read the warning message carefully.'
     },
     task: {
         taskName: "Name",
