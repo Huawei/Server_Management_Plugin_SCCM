@@ -35,4 +35,4 @@ V. Supported Device
 
 VI. Additional Resources
 
-    For more information consult User Guide. https://github.com/Huawei/Server_Managemet_Plugin_SCCM/docs
+    For more information consult User Guide. https://github.com/Huawei/Server_Management_Plugin_SCCM/tree/master/docs
