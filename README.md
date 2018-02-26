@@ -13,7 +13,7 @@ I. General Information
 
 II. Description
 
-    The SCCM Plugin is a plug-in integrated in the SCCM and used for Huawei Server management. It can be used to connect to multiple eSight system and view the servers managed by eSight V300R008C00SPC201.
+    The SCCM Plugin is a plug-in integrated in the SCCM and used for Huawei Server management. It can be used to connect to multiple eSight system and view the servers managed by eSight.
 	
 III.Supported Software Version
 
