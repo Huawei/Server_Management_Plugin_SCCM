@@ -228,6 +228,31 @@
                         <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
                         </el-table-column>
                     </el-table>
+                    <!--昆仑服务器服务器显示的table-->
+                    <el-table v-show="searchKey=='kunlun'" v-bind:data="listData" border style="width: 100%" v-loading="loading" element-loading-text="Loading">
+                        <el-table-column prop="ipAddress" v-bind:label="i18ns.serverList.serverIPAddress">
+                        </el-table-column>
+                        <el-table-column prop="serverName" v-bind:label="i18ns.serverList.serverName">
+                        </el-table-column>
+                        <el-table-column prop="status" v-bind:label="i18ns.serverList.serverStatus">
+                            <template scope="scope">
+                                <template v-if="scope.row.status=='0'">
+                                    <span>{{i18ns.serverList.serverNormal}}</span>
+                                </template>
+                                <template v-else-if="scope.row.status=='-1'">
+                                    <span>{{i18ns.serverList.serverOffline}}</span>
+                                </template>
+                                <template v-else-if="scope.row.status=='-2'">
+                                    <span>{{i18ns.serverList.serverUnknown}}</span>
+                                </template>
+                                <template v-else>
+                                    <span>{{i18ns.serverList.serverFault}}</span>
+                                </template>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
+                        </el-table-column>
+                    </el-table>
                 </div>
             </template>
 
@@ -485,6 +510,8 @@
                     server = 'blade';
                 } else if (server == 'Highdensity') {
                     server = 'highdensity';
+                } else if (server == 'kunlun') {
+                    server = 'kunlun';
                 } else {
                     server = '';
                 }

@@ -245,7 +245,8 @@ var i18n_en = {
         serverStoragenode: 'Storagenode',
         serverThirdpartyserver: 'Thirdpartyserver',
         cpuHealthState: 'CPU Health Status',
-        memoryHealthState: 'Memory Health Status'
+        memoryHealthState: 'Memory Health Status',
+        serverKunLun:'KunLun'
     },
     firmware: {
         clearFailedTask: 'Clear Failed Task',
@@ -527,7 +528,8 @@ var i18n_en = {
         bladeServer: "Blade Server",
         deviceModel: "Device Model",
         switchBoard: "Switch Board",
-        rackServer: 'Rack Server'
+        rackServer: 'Rack Server',
+        kunlunServer:'KunLun Server'
     }
 
 }
