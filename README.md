@@ -8,7 +8,7 @@ I. General Information
 
     Name:     SCCM Plugin Pack for Huawei Server
     Category: Configuration
-    Version:  1.1.0
+    Version:  1.1.2
 
 
 II. Description
