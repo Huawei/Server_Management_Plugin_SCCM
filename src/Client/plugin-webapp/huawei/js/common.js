@@ -1,4 +1,16 @@
-﻿/**
+﻿document.write("<script src='../js/lang.js'></script>");
+
+function langSetting(settingLang) {
+    var currentLang = localStorage.getItem('lang');
+    if (settingLang == currentLang) {
+        console.log("Current lang is correct lang.");
+    } else {
+        changelang(settingLang);
+        console.log("Replace lang using settingLang: " + settingLang + ".");
+    }
+}
+
+/**
  * 改变当前语言
  * @param {string} lang (zhCN,en)
  */
@@ -213,54 +225,26 @@ function select_templateChange(templateType) {
  * 获取esight列表
  **/
 function getEsightList(callback) {
-    var esightData = [{
-        id: 1,
-        hostIp: '127.0.0.1',
-        aliasName: "host",
-        hostPort: '32102',
-        loginAccount: 'sxw',
-        loginPwd: '',
-        latestStatus: '',
-        reservedInt1: '',
-        reservedInt2: '',
-        reservedStr1: '',
-        reservedStr2: '',
-        lastModify: '2017-05-22',
-        createTime: '2017-05-22 17:28:46'
-    }, {
-        id: 2,
-        hostIp: '127.0.0.2',
-        aliasName: "",
-        hostPort: '32102',
-        loginAccount: 'sxw',
-        loginPwd: '',
-        latestStatus: '',
-        reservedInt1: '',
-        reservedInt2: '',
-        reservedStr1: '',
-        reservedStr2: '',
-        lastModify: '2017-05-22',
-        createTime: '2017-05-22 17:28:46'
-    }, {
-        id: 3,
-        hostIp: '127.0.0.3',
-        aliasName: "server",
-        hostPort: '32102',
-        loginAccount: 'sxw',
-        loginPwd: '',
-        latestStatus: '',
-        reservedInt1: '',
-        reservedInt2: '',
-        reservedStr1: '',
-        reservedStr2: '',
-        lastModify: '2017-05-22',
-        createTime: '2017-05-22 17:28:46'
-    }];
-    if (typeof callback === "function") {
-        var ret = { code: '0', msg: '', data: esightData }
-        localStorage.setItem('esightList', JSON.stringify(esightData)); //code==0时
-        callback(ret);
+    if (window.NetBound == undefined || window.NetBound == null || !window.NetBound) {
+        //判断cefBrowser是否已注册JsObject
+        alert('window.NetBound does not exist.');
+        console.log('window.NetBound does not exist.');
+        return;
     }
+		
+		var param = { "defaultParam": "" };
+		ExecuteAnynsMethod(param, "loadESightList", false, (resultStr) => {
+			var resultJson = JSON.parse(resultStr);
+			console.log("loadESightList result: ");
+			console.log(resultJson);
+			var esightData = resultJson.Data;
+			
+			if (typeof callback === "function") {
+					var ret = { code: resultJson.Code, msg: resultJson.ExceptionMsg, data: esightData }
+					localStorage.setItem('esightList', JSON.stringify(esightData)); //code==0时
+					callback(ret);
+			}
+		});	
 }
 /**
  * 获取esight列表
@@ -880,4 +864,55 @@ String.prototype.format = function(args) {
         }
     }
     return result;
+}
+
+//判断是否空对象 by Jacky on 2017-8-24
+function isEmptyObject(obj) {
+	if (JSON.stringify(obj) === "{}") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+//判断是否空对象并附加默认参数 by Jacky on 2017-8-24
+function isEmptyObjectWithDefaultParameter(obj) {
+	if (isEmptyObject(obj)) {
+		return { "defaultParam": "" };
+	} else {
+		return obj;
+	} 
+}
+
+/*
+ *功能：异步执行rest.js中跟CefSharp的交互方法（只处理Promise逻辑）
+ *参数：ayncResult -> 一个Promise
+ *			callback -> 回调函数
+ *作者：Jacky
+ *日期：2017-8-24
+ */
+function ExecuteAnynsMethodOnlyHandlerPromise(ayncResult, callback) {
+	ayncResult.then(function (resultStr) {
+		callback(resultStr);
+	}).catch((exception) => {
+		console.log(exception);
+		alert(exception);
+	});
+}
+
+/*
+ *功能：异步执行rest.js中跟CefSharp的交互方法
+ *参数：param -> 交互方法的参数
+ *			methodName -> 交互方法的名称
+ *			isCheckParam -> 是否需要检查是不是空参数
+ *			callback -> 回调函数
+ *作者：Jacky
+ *日期：2017-8-24
+ */
+function ExecuteAnynsMethod(param, methodName, isCheckParam, callback) {
+	if (isCheckParam) {
+		param = isEmptyObjectWithDefaultParameter(param);
+	}
+	var ayncResult = NetBound.execute(methodName, param);
+	ExecuteAnynsMethodOnlyHandlerPromise(ayncResult, callback);
 }
