@@ -23,19 +23,19 @@
         [v-cloak] {
             display: none;
         }
-        
+
         body {
             min-width: 900px;
         }
-        
+
         .row-checkbox {
             margin-top: 0px;
         }
-        
+
         .el-form-item {
             margin-bottom: 5px;
         }
-        
+
         .el-table .cell {
             white-space: pre-wrap;
         }
@@ -55,19 +55,20 @@
                         <template scope="scope">
                             <el-checkbox v-model="scope.row.isChecked" @change="firmwareChange(scope.$index)"></el-checkbox>
                         </template>
-            </el-table-column>
-            <el-table-column width="240px" prop="basepackageName" v-bind:label="i18ns.firmware.packageName">
-            </el-table-column>
-            <el-table-column width="200px" prop="basepackageType" v-bind:label="i18ns.firmware.packageType">
-            </el-table-column>
-            <el-table-column prop="basepackageDesc" v-bind:label="i18ns.firmware.packageDesc">
-            </el-table-column>
-            </el-table>
+                    </el-table-column>
+                    <el-table-column width="240px" prop="basepackageName" v-bind:label="i18ns.firmware.packageName">
+                    </el-table-column>
+                    <el-table-column width="200px" prop="basepackageType" v-bind:label="i18ns.firmware.packageType">
+                    </el-table-column>
+                    <el-table-column prop="basepackageDesc" v-bind:label="i18ns.firmware.packageDesc">
+                    </el-table-column>
+                </el-table>
             </template>
             <!-- 升级固件包分页 -->
             <el-row class="pagination-row">
                 <el-col v-bind:span="24" style="text-align:left;">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" v-bind:current-page="currentPage" v-bind:page-sizes="pageSizes" v-bind:page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" v-bind:total="total">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" v-bind:current-page="currentPage" v-bind:page-sizes="pageSizes"
+                        v-bind:page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" v-bind:total="total">
                     </el-pagination>
                 </el-col>
             </el-row>
@@ -102,11 +103,12 @@
                         <el-form-item v-bind:label="i18ns.firmware.inBand_firm">
                             <el-checkbox :label="firmwareTypeList[7].value" :key="firmwareTypeList[7].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[7].label}}</el-checkbox>
                             <el-checkbox :label="firmwareTypeList[8].value" :key="firmwareTypeList[8].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[8].label}}</el-checkbox>
-                            <el-checkbox :label="firmwareTypeList[9].label" :key="firmwareTypeList[9].value" :value="firmwareTypeList[9].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[9].label}}</el-checkbox>
+                            <el-checkbox :label="firmwareTypeList[9].label" :key="firmwareTypeList[9].value" :value="firmwareTypeList[9].value" name="firmwareTypes"
+                                :disabled="inBandBool">{{firmwareTypeList[9].label}}</el-checkbox>
                             <el-checkbox :label="firmwareTypeList[10].label" :key="firmwareTypeList[10].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[10].label}}</el-checkbox>
                             <el-checkbox :label="firmwareTypeList[11].label" :key="firmwareTypeList[11].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[11].label}}</el-checkbox>
-                            <el-checkbox :label="firmwareTypeList[12].label" :key="firmwareTypeList[12].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[12].label}}</el-checkbox>
-                            <el-checkbox :label="firmwareTypeList[13].value" :key="firmwareTypeList[13].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[13].label}}</el-checkbox>
+                            <!-- <el-checkbox :label="firmwareTypeList[12].label" :key="firmwareTypeList[12].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[12].label}}</el-checkbox>
+                            <el-checkbox :label="firmwareTypeList[13].value" :key="firmwareTypeList[13].value" name="firmwareTypes" :disabled="inBandBool">{{firmwareTypeList[13].label}}</el-checkbox> -->
                         </el-form-item>
                     </el-row>
                 </el-checkbox-group>
@@ -126,11 +128,13 @@
                             <el-col :span="8" class="title div-center">{{i18ns.task.dn}}</el-col>
                             <el-col :span="8" class="title div-center">{{i18ns.serverList.serverIPAddress}}</el-col>
                         </el-row>
-                        <el-tree :data="blade.listData" :props="defaultProps" ref="bladeTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false" :render-content="renderContent" @check-change="handleServerChange1" :check-strictly="true">
+                        <el-tree :data="blade.listData" :props="defaultProps" ref="bladeTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false"
+                            :render-content="renderContent" @check-change="handleServerChange1" :check-strictly="true">
                         </el-tree>
                         <el-row class="pagination-row">
                             <el-col v-bind:span="24" style="text-align: left;  margin-top: 15px; padding-bottom: 12px; position: relative;">
-                                <el-pagination @size-change="bladeSizeChange" @current-change="bladeCurrentChange" :current-page="blade.param.start" :page-sizes="blade.pageSizes" :page-size="blade.param.size" layout="total, sizes, prev, pager, next, jumper" :total="blade.totalCount">
+                                <el-pagination @size-change="bladeSizeChange" @current-change="bladeCurrentChange" :current-page="blade.param.start" :page-sizes="blade.pageSizes"
+                                    :page-size="blade.param.size" layout="total, sizes, prev, pager, next, jumper" :total="blade.totalCount">
                                 </el-pagination>
                             </el-col>
                         </el-row>
@@ -143,11 +147,13 @@
                             <el-col :span="8" class="title div-center">{{i18ns.task.dn}}</el-col>
                             <el-col :span="8" class="title div-center">{{i18ns.serverList.serverIPAddress}}</el-col>
                         </el-row>
-                        <el-tree :data="rack.listData" :props="defaultProps" ref="rackTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false" :render-content="renderContent" @check-change="handleServerChange2" :check-strictly="true">
+                        <el-tree :data="rack.listData" :props="defaultProps" ref="rackTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false"
+                            :render-content="renderContent" @check-change="handleServerChange2" :check-strictly="true">
                         </el-tree>
                         <el-row class="pagination-row">
                             <el-col v-bind:span="24" style="text-align: left;  margin-top: 15px; padding-bottom: 12px; position: relative;">
-                                <el-pagination @size-change="rackSizeChange" @current-change="rackCurrentChange" :current-page="rack.param.start" :page-sizes="rack.pageSizes" :page-size="rack.param.size" layout="total, sizes, prev, pager, next, jumper" :total="rack.totalCount">
+                                <el-pagination @size-change="rackSizeChange" @current-change="rackCurrentChange" :current-page="rack.param.start" :page-sizes="rack.pageSizes"
+                                    :page-size="rack.param.size" layout="total, sizes, prev, pager, next, jumper" :total="rack.totalCount">
                                 </el-pagination>
                             </el-col>
                         </el-row>
@@ -160,13 +166,34 @@
                             <el-col :span="8" class="title div-center">{{i18ns.task.dn}}</el-col>
                             <el-col :span="8" class="title div-center">{{i18ns.serverList.serverIPAddress}}</el-col>
                         </el-row>
-                        <el-tree :data="highdensity.listData" :props="defaultProps" ref="highdensityTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false" :render-content="renderContent1" @check-change="handleServerChange3" :check-strictly="true"
-                            id="highdensity">
+                        <el-tree :data="highdensity.listData" :props="defaultProps" ref="highdensityTree" show-checkbox node-key="dn" default-expand-all
+                            :expand-on-click-node="false" :render-content="renderContent1" @check-change="handleServerChange3"
+                            :check-strictly="true" id="highdensity">
                         </el-tree>
                         <el-row class="pagination-row">
                             <el-col v-bind:span="24" style="text-align: left;  margin-top: 15px; padding-bottom: 12px; position: relative;">
-                                <el-pagination @size-change="highdensitySizeChange" @current-change="highdensityCurrentChange" :current-page="highdensity.param.start" :page-sizes="highdensity.pageSizes" :page-size="highdensity.param.size" layout="total, sizes, prev, pager, next, jumper"
+                                <el-pagination @size-change="highdensitySizeChange" @current-change="highdensityCurrentChange" :current-page="highdensity.param.start"
+                                    :page-sizes="highdensity.pageSizes" :page-size="highdensity.param.size" layout="total, sizes, prev, pager, next, jumper"
                                     :total="highdensity.totalCount">
+                                </el-pagination>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane :label="i18ns.serverList.serverKunLun" name="kunlunTab" v-loading="loading" element-loading-text="Loading">
+                        <el-row>
+                            <el-col :span="8" class="title div-center">
+                                <el-checkbox v-model="serverKunLunAllChecked" @change="serverKunLunAllChange"></el-checkbox> {{i18ns.serverList.serverName}}
+                            </el-col>
+                            <el-col :span="8" class="title div-center">{{i18ns.task.dn}}</el-col>
+                            <el-col :span="8" class="title div-center">{{i18ns.serverList.serverIPAddress}}</el-col>
+                        </el-row>
+                        <el-tree :data="kunlun.listData" :props="defaultProps" ref="kunlunTree" show-checkbox node-key="dn" default-expand-all :expand-on-click-node="false"
+                            :render-content="renderContent" @check-change="handleServerChange4" :check-strictly="true">
+                        </el-tree>
+                        <el-row class="pagination-row">
+                            <el-col v-bind:span="24" style="text-align: left;  margin-top: 15px; padding-bottom: 12px; position: relative;">
+                                <el-pagination @size-change="kunlunSizeChange" @current-change="kunlunCurrentChange" :current-page="kunlun.param.start" :page-sizes="kunlun.pageSizes"
+                                    :page-size="kunlun.param.size" layout="total, sizes, prev, pager, next, jumper" :total="kunlun.totalCount">
                                 </el-pagination>
                             </el-col>
                         </el-row>
@@ -218,7 +245,7 @@
                 <el-checkbox v-model="isAgree">{{i18ns.firmware.agreeTip}}</el-checkbox>
             </div>
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" :disabled ="!isAgree" @click="save">{{i18ns.common.confirm}}</el-button>
+                <el-button type="primary" :disabled="!isAgree" @click="save">{{i18ns.common.confirm}}</el-button>
                 <el-button @click="highRiskdialogVisible = false">{{i18ns.common.cancel}}</el-button>
             </span>
         </el-dialog>
@@ -228,17 +255,17 @@
         .el-alert__icon {
             color: #20a0ff;
         }
-        
+
         .el-tree__empty-text {
             font-size: 12px;
         }
-        
+
         .el-alert--info {
             background-color: #FFF5EA;
             color: #1f2d3d;
             margin-bottom: 8px;
         }
-        
+
         .el-tree-node__content {
             line-height: 30px;
             height: 30px;
@@ -246,7 +273,7 @@
             border-bottom: 1px solid #e0e6ed;
             font-size: 12px;
         }
-        
+
         .title {
             padding: 0 14px;
             font-weight: bold;
@@ -263,22 +290,22 @@
             font-size: 12px;
             color: #1f2d3d;
         }
-        
+
         .line-row {
             position: absolute;
             left: 33.33%;
             top: 0;
             width: 66.66%;
         }
-        
+
         .el-tabs__header {
             margin-bottom: 0px;
         }
-        
+
         .el-input {
             max-width: 500px;
         }
-        
+
         .el-dialog {
             width: 400px;
         }
@@ -351,37 +378,57 @@
                     pageSizes: [5, 10, 20],
                     totalCount: 0
                 },
+                kunlun: {
+                    listData: [],
+                    param: {
+                        servertype: "kunlun",
+                        orderby: "ipAddress",
+                        desc: true,
+                        start: 1,
+                        size: 5,
+                    },
+                    pageSizes: [5, 10, 20],
+                    totalCount: 0
+                },
                 selectServers: [],
                 serverHighdensityAllChecked: false,
                 serverBladeAllChecked: false,
                 serverRackAllChecked: false,
+                serverKunLunAllChecked: false,
                 serverBladeNum: 0,
                 serverRackNum: 0,
+                serverKunLunNum: 0,
                 serverHighdensityNum: 0,
                 highRiskdialogVisible: false,
                 isAgree: false
             },
             computed: {
-                bladeParams: function() {
+                bladeParams: function () {
                     return {
                         esight: this.currentESight,
                         param: this.blade.param
                     }
                 },
-                rackParams: function() {
+                rackParams: function () {
                     return {
                         esight: this.currentESight,
                         param: this.rack.param
                     }
                 },
-                highdensityParams: function() {
+                highdensityParams: function () {
                     return {
                         esight: this.currentESight,
                         param: this.highdensity.param
                     }
+                },
+                kunlunParams: function () {
+                    return {
+                        esight: this.currentESight,
+                        param: this.kunlun.param
+                    }
                 }
             },
-            created: function() {
+            created: function () {
                 this.i18ns = getIn18();
                 this.firmwareTypeList = getFirmwareTypeList();
                 this.currentESight = getCurrentEsight();
@@ -390,13 +437,13 @@
                     this.pageSize = parseInt(_pageSize);
                 };
             },
-            mounted: function() {
-                setTimeout(function() {
+            mounted: function () {
+                setTimeout(function () {
                     app.getFirmwareListData(); //获取已上传成功的固件列表数据
                 }, 0);
             },
             methods: {
-                serverBladeAllChange: function() {
+                serverBladeAllChange: function () {
                     if (this.serverBladeAllChecked) {
                         var keys = [];
                         for (var i = 0; i < this.blade.listData.length; i++) {
@@ -411,7 +458,7 @@
                         this.$refs['bladeTree'].setCheckedKeys([]);
                     }
                 },
-                serverRackAllChange: function() {
+                serverRackAllChange: function () {
                     if (this.serverRackAllChecked) {
                         var keys = [];
                         for (var i = 0; i < this.rack.listData.length; i++) {
@@ -422,7 +469,7 @@
                         this.$refs['rackTree'].setCheckedKeys([]);
                     }
                 },
-                serverHighdensityAllChange: function() {
+                serverHighdensityAllChange: function () {
                     if (this.serverHighdensityAllChecked) {
                         var keys = [];
                         for (var i = 0; i < this.highdensity.listData.length; i++) {
@@ -436,7 +483,18 @@
                         this.$refs['highdensityTree'].setCheckedKeys([]);
                     }
                 },
-                checkboxChange: function(val) {
+                serverKunLunAllChange: function () {
+                    if (this.serverKunLunAllChecked) {
+                        var keys = [];
+                        for (var i = 0; i < this.kunlun.listData.length; i++) {
+                            keys.push(this.kunlun.listData[i].dn);
+                        }
+                        this.$refs['kunlunTree'].setCheckedKeys(keys);
+                    } else {
+                        this.$refs['kunlunTree'].setCheckedKeys([]);
+                    }
+                },
+                checkboxChange: function (val) {
 
                 },
                 /**
@@ -444,7 +502,7 @@
                  * 
                  * @param {any} val 
                  */
-                handleSizeChange: function(val) {
+                handleSizeChange: function (val) {
                     this.pageSize = val;
                     localStorage.setItem("addFirmwareTaskSize", val);
                     this.getFirmwareListData();
@@ -454,7 +512,7 @@
                  * 
                  * @param {any} val 
                  */
-                handleCurrentChange: function(val) {
+                handleCurrentChange: function (val) {
                     this.currentPage = val;
                     this.getFirmwareListData();
                 },
@@ -462,7 +520,7 @@
                  * 获取升级包列表
                  * 
                  */
-                getFirmwareListData: function() {
+                getFirmwareListData: function () {
                     firmwareManage.getFirmwareList({
                         "esight": this.currentESight,
                         "param": {
@@ -476,7 +534,7 @@
                  * 
                  * @param {any} ret 
                  */
-                bindFirmwareList: function(ret) {
+                bindFirmwareList: function (ret) {
                     this.firmwareListData = [];
                     this.tableloading = false; //隐藏loading提示
                     if (ret.code === '0') {
@@ -484,6 +542,7 @@
                         app.getBladeList();
                         app.getRackList();
                         app.gethighdensityList();
+                        app.getKunLunList();
                         var data = ret.data;
                         for (var i = 0; i < data.length; i++) {
                             var d = data[i];
@@ -504,7 +563,7 @@
                  * @param {any} msg 
                  * @param {any} callback 
                  */
-                alertMsg: function(msg, callback) {
+                alertMsg: function (msg, callback) {
                     console.log(1);
                     this.$alert(msg, this.i18ns.common.prompt, {
                         confirmButtonText: this.i18ns.common.confirm,
@@ -518,7 +577,7 @@
                  * 
                  * @param {any} index 
                  */
-                firmwareChange: function(index) {
+                firmwareChange: function (index) {
                     var lg = this.firmwareListData.length;
                     for (var i = 0; i < lg; i++) {
                         if (index != i) {
@@ -532,8 +591,8 @@
                  * 
                  * @param {any} index 
                  */
-                firmwaredoubleRow: function(row) {
-                    var index = _.findIndex(this.firmwareListData, function(x) {
+                firmwaredoubleRow: function (row) {
+                    var index = _.findIndex(this.firmwareListData, function (x) {
                         return x == row
                     });
                     var lg = this.firmwareListData.length;
@@ -551,9 +610,9 @@
                  * 
                  * @param {any} event 
                  */
-                firmwareTypeChangeAll: function(event) {
+                firmwareTypeChangeAll: function (event) {
                     var allTypes = [];
-                    _.forEach(this.firmwareTypeList, function(item) {
+                    _.forEach(this.firmwareTypeList, function (item) {
                         allTypes.push(item.value);
                     });
                     this.firmwareTypes = event.target.checked ? allTypes : [];
@@ -563,11 +622,11 @@
                  * 
                  * @param {any} value 
                  */
-                firmwareTypeChange: function(value) {
+                firmwareTypeChange: function (value) {
                     var checkedCount = value.length - 1;
                     this.checkAll = checkedCount === this.firmwareTypeList.length - 1;
                     if (value.length > 0) {
-                        _.forEach(value, function(x) {
+                        _.forEach(value, function (x) {
                             if (x == 'CNA_DRIVE' || x == 'RAID_DRIVE') {
                                 app.inBandBool = true;
                                 app.outBandBool = true;
@@ -591,13 +650,13 @@
                  * 获取刀片服务器列表
                  * 
                  */
-                getBladeList: function() {
+                getBladeList: function () {
                     this.loading = true;
-                    firmwareTaskManage.getServerList(this.bladeParams, function(res) {
+                    firmwareTaskManage.getServerList(this.bladeParams, function (res) {
                         var data = res.data;
                         app.blade.listData = [];
                         app.blade.totalCount = data.totalNum;
-                        _.forEach(data.data, function(x) {
+                        _.forEach(data.data, function (x) {
                             app.blade.listData.push(x);
                             app.serverBladeNum += 1;
                             app.serverBladeNum += x.childBlades.length;
@@ -611,13 +670,13 @@
                  * 获取机架服务器列表
                  * 
                  */
-                getRackList: function() {
+                getRackList: function () {
                     this.loading = true;
-                    firmwareTaskManage.getServerList(this.rackParams, function(res) {
+                    firmwareTaskManage.getServerList(this.rackParams, function (res) {
                         var data = res.data;
                         app.rack.listData = [];
                         app.rack.totalCount = data.totalNum;
-                        _.forEach(data.data, function(x) {
+                        _.forEach(data.data, function (x) {
                             app.rack.listData.push(x);
                             app.serverRackNum += 1;
                         })
@@ -629,14 +688,14 @@
                  * 获取高密服务器列表
                  * 
                  */
-                gethighdensityList: function() {
+                gethighdensityList: function () {
                     this.loading = true;
                     console.log(this.highdensityParams);
-                    firmwareTaskManage.getServerList(this.highdensityParams, function(res) {
+                    firmwareTaskManage.getServerList(this.highdensityParams, function (res) {
                         var data = res.data;
                         app.highdensity.listData = [];
                         app.highdensity.totalCount = data.totalNum;
-                        _.forEach(data.data, function(x) {
+                        _.forEach(data.data, function (x) {
 
                             app.highdensity.listData.push({
                                 dn: x.dn,
@@ -650,7 +709,7 @@
                         });
                         app.setCurrentPageChecked();
                         app.loading = false;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             var cks = document.querySelectorAll('#highdensity .pcc');
                             for (var i = 0; i < cks.length; i++) {
                                 var ck = cks[i].parentNode.childNodes[1];
@@ -661,12 +720,42 @@
                     });
                 },
                 /**
+                 * 获取昆仑服务器列表
+                 * 
+                 */
+                getKunLunList: function () {
+                    this.loading = true;
+                    firmwareTaskManage.getServerList(this.kunlunParams, function (res) {
+                        var data = res.data;
+                        app.kunlun.listData = [];
+                        app.kunlun.totalCount = data.totalNum;
+                        _.forEach(data.data, function (x) {
+                            app.kunlun.listData.push(x);
+                            app.serverKunLunNum += 1;
+                        })
+                        app.setCurrentPageChecked();
+                        app.loading = false;
+                    });
+                },
+                /**
                  * 设置当前页选中的服务器类型
                  * 
                  */
-                setCurrentPageChecked: function() {
-                    var tree = this.activeTab == 'bladeTab' ? this.$refs['bladeTree'] : this.$refs['rackTree'];
-                    var keys = this.selectServers.map(function(i) {
+                setCurrentPageChecked: function () {
+                    var tree = this.$refs['bladeTree'];
+                    if (this.activeTab == 'bladeTab') {
+                        tree = this.$refs['bladeTree']
+                    }
+                    else if (this.activeTab == 'rackTab') {
+                        tree = this.$refs['rackTree']
+                    }
+                    else if (this.activeTab == 'highdensityTab') {
+                        tree = this.$refs['highdensityTree']
+                    }
+                    else if (this.activeTab == 'kunlunTab') {
+                        tree = this.$refs['kunlunTree']
+                    }
+                    var keys = this.selectServers.map(function (i) {
                         return i.dn
                     });
                     //设置当前页面的选中
@@ -678,15 +767,16 @@
                  * @param {any} index 
                  * @param {any} row 
                  */
-                confirmDelete: function(index, row) {
+                confirmDelete: function (index, row) {
                     //得到三个tree的选中的key
-                    var checkKeys = this.$refs['bladeTree'].getCheckedKeys().concat(this.$refs['rackTree'].getCheckedKeys()).concat(this.$refs['highdensityTree'].getCheckedKeys());
-                    if (_.find(checkKeys, function(x) {
-                            return x == row.dn
-                        })) {
+                    var checkKeys = this.$refs['bladeTree'].getCheckedKeys().concat(this.$refs['rackTree'].getCheckedKeys()).concat(this.$refs['highdensityTree'].getCheckedKeys()).concat(this.$refs['kunlunTree'].getCheckedKeys());
+                    if (_.find(checkKeys, function (x) {
+                        return x == row.dn
+                    })) {
                         this.$refs['bladeTree'].setChecked(row.dn, false);
                         this.$refs['rackTree'].setChecked(row.dn, false);
                         this.$refs['highdensityTree'].setChecked(row.dn, false);
+                        this.$refs['kunlunTree'].setChecked(row.dn, false);
                     } else {
                         this.taskForm.selectServers.splice(index, 1);
                     }
@@ -696,7 +786,7 @@
                  * 
                  * @param {any} pageSize 
                  */
-                bladeSizeChange: function(pageSize) {
+                bladeSizeChange: function (pageSize) {
                     this.blade.param.size = pageSize;
                     this.getBladeList();
                 },
@@ -705,7 +795,7 @@
                  * 
                  * @param {any} pageNo 
                  */
-                bladeCurrentChange: function(pageNo) {
+                bladeCurrentChange: function (pageNo) {
                     this.blade.param.start = pageNo;
                     this.getBladeList();
                 },
@@ -714,7 +804,7 @@
                  * 
                  * @param {any} pageSize 
                  */
-                rackSizeChange: function(pageSize) {
+                rackSizeChange: function (pageSize) {
                     this.rack.param.size = pageSize;
                     this.getRackList();
                 },
@@ -723,7 +813,7 @@
                  * 
                  * @param {any} pageNo 
                  */
-                rackCurrentChange: function(pageNo) {
+                rackCurrentChange: function (pageNo) {
                     this.rack.param.start = pageNo;
                     this.getRackList();
                 },
@@ -732,7 +822,7 @@
                  * 
                  * @param {any} pageSize 
                  */
-                highdensitySizeChange: function(pageSize) {
+                highdensitySizeChange: function (pageSize) {
                     this.rack.param.size = pageSize;
                     this.gethighdensityList();
                 },
@@ -741,16 +831,34 @@
                  * 
                  * @param {any} pageNo 
                  */
-                highdensityCurrentChange: function(pageNo) {
+                highdensityCurrentChange: function (pageNo) {
                     this.rack.param.start = pageNo;
                     this.gethighdensityList();
+                },
+                 /**
+                 * 切换机架服务器一页显示的数量
+                 * 
+                 * @param {any} pageSize 
+                 */
+                 kunlunSizeChange: function (pageSize) {
+                    this.kunlun.param.size = pageSize;
+                    this.getKunLunList();
+                },
+                /**
+                 * 切换机架服务器当前页
+                 * 
+                 * @param {any} pageNo 
+                 */
+                 kunlunCurrentChange: function (pageNo) {
+                    this.kunlun.param.start = pageNo;
+                    this.getKunLunList();
                 },
                 /**
                  * 完成必填数据后 提交操作
                  * 
                  * @returns 
                  */
-                submit: function() {
+                submit: function () {
                     var _firmwareList;
                     if (!this.firmwareName) {
                         alertMsg(app.i18ns.firmware.basepackageNameTips);
@@ -760,7 +868,7 @@
                         alertMsg(app.i18ns.firmware.firmwareListTips);
                         return;
                     } else {
-                        var i = _.findIndex(this.firmwareTypes, function(x) {
+                        var i = _.findIndex(this.firmwareTypes, function (x) {
                             return x == 'All'
                         });
                         if (i != -1) {
@@ -779,7 +887,7 @@
                  * 
                  * @returns 
                  */
-                save: function() {
+                save: function () {
                     var param = {
                         esight: this.currentESight,
                         param: {
@@ -787,17 +895,17 @@
                             firmwareList: this.firmwareTypes.join(';'),
                             isforceupgrade: this.isforceupgrade,
                             effectiveMethod: parseInt(this.effectiveMethod),
-                            dn: this.selectServers.map(function(i) {
+                            dn: this.selectServers.map(function (i) {
                                 return i.dn
                             }).join(';')
                         }
                     }
                     this.fullscreenLoading = true;
-                    firmwareTaskManage.addFirmwareTask(param, function(ret) {
+                    firmwareTaskManage.addFirmwareTask(param, function (ret) {
                         app.fullscreenLoading = false;
                         app.highRiskdialogVisible = false;
                         if (ret.code === '0') {
-                            alertMsg(app.i18ns.firmware.addSuccessMsg, function() {
+                            alertMsg(app.i18ns.firmware.addSuccessMsg, function () {
                                 window.location.href = 'listFirmwareTask.html?s=' + Math.random();
                             })
                         } else {
@@ -810,7 +918,7 @@
                  * 返回模板列表
                  * 
                  */
-                goBack: function() {
+                goBack: function () {
                     goBack('listFirmwareTask.html');
                 },
                 /**
@@ -820,7 +928,7 @@
                  * @param {any} node 
                  * @returns 
                  */
-                renderContent: function(h, node) {
+                renderContent: function (h, node) {
                     return h('span', [
                         h('span', node.data.serverName || node.data.name || '--'),
                         h('div', {
@@ -845,27 +953,27 @@
                  * @param {any} node 
                  * @returns 
                  */
-                renderContent1: function(h, node) {
+                renderContent1: function (h, node) {
                     if (node.data.childBlades) {
                         return h('span', {
                             class: 'pcc'
                         }, [
-                            h('span', node.data.serverName || node.data.name || '--'),
+                                h('span', node.data.serverName || node.data.name || '--'),
 
-                            h('div', {
-                                class: {
-                                    'line-row': true
-                                }
-                            }, [h('el-col', {
-                                props: {
-                                    span: 12
-                                }
-                            }, node.data["dn"]), h('el-col', {
-                                props: {
-                                    span: 12
-                                }
-                            }, node.data["ipAddress"])])
-                        ])
+                                h('div', {
+                                    class: {
+                                        'line-row': true
+                                    }
+                                }, [h('el-col', {
+                                    props: {
+                                        span: 12
+                                    }
+                                }, node.data["dn"]), h('el-col', {
+                                    props: {
+                                        span: 12
+                                    }
+                                }, node.data["ipAddress"])])
+                            ])
                     } else {
                         return h('span', [
                             h('span', node.data.serverName || node.data.name || '--'),
@@ -893,7 +1001,7 @@
                  * @param {any} checked 
                  * @param {any} indeterminate 
                  */
-                handleServerChange1: function(data, checked, indeterminate) {
+                handleServerChange1: function (data, checked, indeterminate) {
                     if (checked) {
                         this.selectServers.push({
                             name: data.serverName || data.name || '',
@@ -905,7 +1013,7 @@
                             this.serverBladeAllChecked = true;
                         }
                     } else {
-                        var index = _.findIndex(this.selectServers, function(x) {
+                        var index = _.findIndex(this.selectServers, function (x) {
                             return x.dn == data.dn
                         });
                         this.serverBladeAllChecked = false;
@@ -919,7 +1027,7 @@
                  * @param {any} checked 
                  * @param {any} indeterminate 
                  */
-                handleServerChange2: function(data, checked, indeterminate) {
+                handleServerChange2: function (data, checked, indeterminate) {
                     if (checked) {
                         this.selectServers.push({
                             name: data.serverName || data.name || '',
@@ -931,7 +1039,7 @@
                             this.serverRackAllChecked = true;
                         }
                     } else {
-                        var index = _.findIndex(this.selectServers, function(x) {
+                        var index = _.findIndex(this.selectServers, function (x) {
                             return x.dn == data.dn
                         });
                         this.serverRackAllChecked = false;
@@ -945,7 +1053,7 @@
                  * @param {any} checked 
                  * @param {any} indeterminate 
                  */
-                handleServerChange3: function(data, checked, indeterminate) {
+                handleServerChange3: function (data, checked, indeterminate) {
                     if (checked) {
                         this.selectServers.push({
                             name: data.serverName || data.name || '',
@@ -957,10 +1065,36 @@
                             this.serverHighdensityAllChecked = true;
                         }
                     } else {
-                        var index = _.findIndex(this.selectServers, function(x) {
+                        var index = _.findIndex(this.selectServers, function (x) {
                             return x.dn == data.dn
                         });
                         this.serverHighdensityAllChecked = false;
+                        this.selectServers.splice(index, 1);
+                    }
+                },
+                 /**
+                 * 选择服务器时 对应的checkbox的 选择事件
+                 * 
+                 * @param {any} data 
+                 * @param {any} checked 
+                 * @param {any} indeterminate 
+                 */
+                 handleServerChange4: function (data, checked, indeterminate) {
+                    if (checked) {
+                        this.selectServers.push({
+                            name: data.serverName || data.name || '',
+                            dn: data.dn,
+                            ipAddress: data.ipAddress,
+                            servertype: this.ChoiceServerType('kunlun')
+                        });
+                        if (this.$refs['kunlunTree'].getCheckedKeys().length == this.serverKunLunNum) {
+                            this.serverKunLunAllChecked = true;
+                        }
+                    } else {
+                        var index = _.findIndex(this.selectServers, function (x) {
+                            return x.dn == data.dn
+                        });
+                        this.serverKunLunAllChecked = false;
                         this.selectServers.splice(index, 1);
                     }
                 },
@@ -969,21 +1103,23 @@
                  * 
                  * @param {any} servertype 
                  */
-                ChoiceServerType: function(servertype) {
+                ChoiceServerType: function (servertype) {
                     var lang = localStorage.getItem('lang');
                     if (lang) {
                         if (lang == 'en') {
                             return {
                                 blade: 'blade',
                                 rack: 'Rack',
-                                highdensity: 'highdensity'
+                                highdensity: 'highdensity',
+                                kunlun: 'KunLun'
                             }[servertype];
                         }
                     }
                     return {
                         blade: '刀片服务器',
                         rack: '机架服务器',
-                        highdensity: '高密服务器'
+                        highdensity: '高密服务器',
+                        kunlun: '昆仑服务器'
                     }[servertype];
                 }
             }

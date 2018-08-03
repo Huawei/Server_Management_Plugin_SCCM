@@ -56,9 +56,6 @@
             border: 1px solid #dfe6ec;
             background-color: lightgray;
         }
-
-        #cpu,
-        #memory,
         #fan,
         #psu,
         #disk,
@@ -70,7 +67,7 @@
             background-color: limegreen
         }
 
-        #bladeServerStatusImage {
+        #serverStatusImage {
             width: 15px;
             height: 15px;
             display: inline-block;
@@ -152,114 +149,53 @@
 
 <body>
     <div id="app" v-cloak>
-        <!-- 刀片服务器详情 -->
         <div style="margin-top:20px;">
             <!--服务器信息表单-->
             <h4>{{i18ns.deviceInfo.essentialInformation}}</h4>
             <table cellspacing="0" class="table1">
                 <tr>
-                    <td class="td1">&nbsp;{{i18ns.serverList.serverIPAddress}}</td>
-                    <td>&nbsp;{{serverInfos.ipAddress}}</td>
+                    <td class="td1">&nbsp;{{i18ns.common.name}}</td>
+                    <td>&nbsp;{{serverInfos.serverName}}</td>
                     <td class="td1">&nbsp;{{i18ns.common.status}}</td>
                     <td>&nbsp;
-                        <div id="bladeServerStatusImage" v-show="serverInfos.serverInfosStatus"></div>&nbsp;{{serverInfos.serverInfosStatus}}</td>
+                        <div id="serverStatusImage" v-show="serverInfos.serverInfosStatus"></div>&nbsp;{{serverInfos.serverInfosStatus}}</td>
                 </tr>
                 <tr>
+                    <td class="td1">&nbsp;{{i18ns.serverList.serverIPAddress}}</td>
+                    <td>&nbsp;{{serverInfos.ipAddress}}</td>
                     <td class="td1">&nbsp;{{i18ns.deviceInfo.deviceModel}}</td>
-                    <td>&nbsp;{{serverInfos.model}}</td>
-                    <td class="td1">&nbsp;{{i18ns.deviceInfo.location}}</td>
-                    <td>&nbsp;{{serverInfos.slotId}}</td>
+                    <td>&nbsp;{{serverInfos.serverModel}}</td>
                 </tr>
                 <tr>
+                    <td class="td1">&nbsp;{{i18ns.deviceInfo.uuid}}</td>
+                    <td>&nbsp;{{serverInfos.uuid}}</td>
                     <td class="td1">&nbsp;{{i18ns.deviceInfo.productSn}}</td>
                     <td>&nbsp;{{serverInfos.productSn}}</td>
-                    <td class="td1">&nbsp;{{i18ns.deviceInfo.uuid}}</td>
-                    <td>&nbsp;{{serverInfos.bladeUuid}}</td>
                 </tr>
                 <tr>
+                    <td class="td1">&nbsp;{{i18ns.deviceInfo.servertype}}</td>
+
+                    <td>&nbsp;{{i18ns.deviceInfo.kunlunServer}}</td>
                     <td class="td1">&nbsp;{{i18ns.template.templateDesc}}</td>
-                    <td colspan="3">&nbsp;{{serverInfos.description}}</td>
+                    <td>&nbsp;{{serverInfos.description}}</td>
                 </tr>
             </table>
+
             <h4>{{i18ns.deviceInfo.onlineDeviceStatus}}</h4>
 
+
             <el-row>
-                <!--CPU饼状图-->
-                <el-col v-bind:span="4">
-                    <div style="height: 120px; width: 120px;margin-top: 15px;float:right;" v-show="isShowCpu">
-                        <canvas id="Cpu" width="120" height="120"></canvas>
-                    </div>
-                    <div style="margin-top: 80px; text-align: center" v-show="!isShowCpu">{{i18ns.deviceInfo.NoRecord}}</div>
-                </el-col>
-
-                <el-col v-bind:span="4">
-                    <div style="display:flex;align-items:center;margin-top:20px;margin-left:40px">
-                        <div class="whiteClass"></div>
-                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:20px">{{i18ns.deviceInfo.cpu}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="limegreenClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{normalCpu}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.normal}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="redClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{faultCpu}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.fault}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="royalblueClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{unknownCpu}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.unknown}}</span>
-                    </div>
-                </el-col>
-                <!--内存饼状图-->
-                <el-col v-bind:span="4">
-                    <div style="height: 120px; width: 120px;margin-top: 15px;float:right;" v-show="isShowMemory">
-                        <canvas id="Memory" width="120" height="120"></canvas>
-                    </div>
-                    <div style="margin-top: 80px; text-align: center" v-show="!isShowMemory">{{i18ns.deviceInfo.NoRecord}}</div>
-                </el-col>
-
-                <el-col v-bind:span="4">
-                    <div style="display:flex;align-items:center;margin-top:20px;margin-left:40px">
-                        <div class="whiteClass"></div>
-                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:20px">{{i18ns.deviceInfo.memory}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="limegreenClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{normalMemory}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.normal}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="redClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{faultMemory}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.fault}}</span>
-                    </div>
-
-                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
-                        <div class="royalblueClass"></div>
-                        <span style="line-height: 10px;padding-left: 1px">{{unknownMemory}}</span>
-                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.unknown}}</span>
-                    </div>
-                </el-col>
                 <!--硬盘饼状图-->
-                <el-col v-bind:span="4">
+                <el-col :span="4">
                     <div style="height: 120px; width: 120px;margin-top: 15px;float:right;" v-show="isShowDisk">
                         <canvas id="Disk" width="120" height="120"></canvas>
                     </div>
                     <div style="margin-top: 80px; text-align: center" v-show="!isShowDisk">{{i18ns.deviceInfo.NoRecord}}</div>
                 </el-col>
-
-                <el-col v-bind:span="4">
-                    <div style="display:flex;align-items:center;margin-top:20px;margin-left:40px">
+                <el-col :span="4">
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
                         <div class="whiteClass"></div>
-                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:20px">{{i18ns.deviceInfo.disk}}</span>
+                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:40px">{{i18ns.deviceInfo.disk}}</span>
                     </div>
 
                     <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
@@ -280,6 +216,67 @@
                         <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.unknown}}</span>
                     </div>
                 </el-col>
+                <!--电源饼状图-->
+                <el-col :span="4">
+                    <div style="height: 120px; width: 120px;margin-top: 15px;float:right;" v-show="isShowPSU">
+                        <canvas id="PSU" width="120" height="120"></canvas>
+                    </div>
+                    <div style="margin-top: 80px; text-align: center" v-show="!isShowPSU">{{i18ns.deviceInfo.NoRecord}}</div>
+                </el-col>
+                <el-col :span="4">
+                    <div style="display:flex;align-items:center;margin-top:20px;margin-left:40px">
+                        <div class="whiteClass"></div>
+                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:20px">{{i18ns.deviceInfo.psu}}</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="limegreenClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{normalPSU}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.normal}}</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="redClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{faultPSU}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.fault}}</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="royalblueClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{unknownPSU}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.unknown}}</span>
+                    </div>
+                </el-col>
+                <!--风扇饼状图-->
+                <el-col :span="4">
+                    <div style="height: 120px; width: 120px;margin-top: 15px;float:right;" v-show="isShowFan">
+                        <canvas id="Fan" width="120" height="120"></canvas>
+                    </div>
+                    <div style="margin-top: 80px; text-align: center" v-show="!isShowFan">{{i18ns.deviceInfo.NoRecord}}</div>
+                </el-col>
+                <el-col :span="4">
+                    <div style="display:flex;align-items:center;margin-top:20px;margin-left:40px">
+                        <div class="whiteClass"></div>
+                        <span style="line-height: 10px;padding-left: 10px;padding-bottom:20px">{{i18ns.deviceInfo.fan}}</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="limegreenClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{normalFan}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.normal}}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="redClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{faultFan}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.fault}}</span>
+                    </div>
+
+                    <div style="display:flex;align-items:center;margin-top:10px;margin-left:40px">
+                        <div class="royalblueClass"></div>
+                        <span style="line-height: 10px;padding-left: 1px">{{unknownFan}}</span>
+                        <span style="line-height: 10px;padding-left: 10px">{{i18ns.deviceInfo.unknown}}</span>
+                    </div>
+                </el-col>
             </el-row>
 
 
@@ -290,6 +287,14 @@
                         <el-row>
                             <!-- 名称 -->
                             <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
+                            </el-table-column>
+                            <el-table-column prop="healthState" v-bind:label="i18ns.deviceInfo.healthState">
+                                <template scope="scope">
+                                    <span v-if="scope.row.healthState==0">{{i18ns.deviceInfo.normal}}</span>
+                                    <span v-else-if="scope.row.healthState==-1">{{i18ns.deviceInfo.offline}}</span>
+                                    <span v-else-if="scope.row.healthState==-2">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.fault}}</span>
+                                </template>
                             </el-table-column>
                             <!-- 序列号 -->
                             <el-table-column prop="sn" v-bind:label="i18ns.deviceInfo.sn">
@@ -302,78 +307,6 @@
                             </el-table-column>
                             <!-- 单板制造日期 -->
                             <el-table-column prop="manuTime" v-bind:label="i18ns.deviceInfo.manuTime">
-                            </el-table-column>
-                            <!-- 厂商 -->
-                            <el-table-column prop="manufacture" v-bind:label="i18ns.deviceInfo.manufacture">
-                            </el-table-column>
-                        </el-row>
-                    </el-table>
-                </el-collapse-item>
-                <!-- cpu详细信息 -->
-                <el-collapse-item v-bind:title="i18ns.deviceInfo.cpu" name="2">
-                    <el-table :data="deviceInfos.CPU">
-                        <el-row>
-                            <!-- 名称 -->
-                            <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
-                            </el-table-column>
-                            <!-- 健康状态 -->
-                            <el-table-column prop="healthState" v-bind:label="i18ns.deviceInfo.healthState">
-                                <template scope="scope">
-                                    <span v-if="scope.row.healthState==0">{{i18ns.deviceInfo.normal}}</span>
-                                    <span v-else-if="scope.row.healthState==-1">{{i18ns.deviceInfo.offline}}</span>
-                                    <span v-else-if="scope.row.healthState==-2">{{i18ns.deviceInfo.unknown}}</span>
-                                    <span v-else>{{i18ns.deviceInfo.fault}}</span>
-                                </template>
-                            </el-table-column>
-                            <!-- 在位信息 -->
-                            <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
-                                <template scope="scope">
-                                    <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
-                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
-                                </template>
-                            </el-table-column>
-                            <!-- 型号 -->
-                            <el-table-column prop="model" v-bind:label="i18ns.deviceInfo.model">
-                            </el-table-column>
-                            <!-- 频率 -->
-                            <el-table-column prop="frequency" v-bind:label="i18ns.deviceInfo.frequency">
-                            </el-table-column>
-                            <!-- 厂商 -->
-                            <el-table-column prop="manufacture" v-bind:label="i18ns.deviceInfo.manufacture">
-                            </el-table-column>
-                        </el-row>
-                    </el-table>
-                </el-collapse-item>
-                <!-- 内存详细信息 -->
-                <el-collapse-item v-bind:title="i18ns.deviceInfo.memory" name="3">
-                    <el-table :data="deviceInfos.Memory">
-                        <el-row>
-                            <!-- 名称 -->
-                            <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
-                            </el-table-column>
-                            <!-- 健康状态 -->
-                            <el-table-column prop="healthState" v-bind:label="i18ns.deviceInfo.healthState">
-                                <template scope="scope">
-                                    <span v-if="scope.row.healthState==0">{{i18ns.deviceInfo.normal}}</span>
-                                    <span v-else-if="scope.row.healthState==-1">{{i18ns.deviceInfo.offline}}</span>
-                                    <span v-else-if="scope.row.healthState==-2">{{i18ns.deviceInfo.unknown}}</span>
-                                    <span v-else>{{i18ns.deviceInfo.fault}}</span>
-                                </template>
-                            </el-table-column>
-                            <!-- 在位信息 -->
-                            <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
-                                <template scope="scope">
-                                    <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
-                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
-                                </template>
-                            </el-table-column>
-                            <!-- 容量 -->
-                            <el-table-column prop="capacity" v-bind:label="i18ns.deviceInfo.capacity">
-                            </el-table-column>
-                            <!-- 频率 -->
-                            <el-table-column prop="frequency" v-bind:label="i18ns.deviceInfo.frequency">
                             </el-table-column>
                             <!-- 厂商 -->
                             <el-table-column prop="manufacture" v-bind:label="i18ns.deviceInfo.manufacture">
@@ -411,8 +344,110 @@
                         </el-row>
                     </el-table>
                 </el-collapse-item>
+                <!-- 电源详细信息 -->
+                <el-collapse-item v-bind:title="i18ns.deviceInfo.psu" name="5">
+                    <el-table :data="deviceInfos.PSU">
+                        <el-row>
+                            <!-- 名称 -->
+                            <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
+                            </el-table-column>
+                            <!-- 健康状态 -->
+                            <el-table-column prop="healthState" v-bind:label="i18ns.deviceInfo.healthState">
+                                <template scope="scope">
+                                    <span v-if="scope.row.healthState==0">{{i18ns.deviceInfo.normal}}</span>
+                                    <span v-else-if="scope.row.healthState==-1">{{i18ns.deviceInfo.offline}}</span>
+                                    <span v-else-if="scope.row.healthState==-2">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.fault}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 在位信息 -->
+                            <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
+                                <template scope="scope">
+                                    <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 输入功率 -->
+                            <el-table-column prop="inputPower" v-bind:label="i18ns.deviceInfo.inputPower">
+                            </el-table-column>
+                            <!-- 额定功率 -->
+                            <el-table-column prop="ratePower" v-bind:label="i18ns.deviceInfo.ratedPower">
+                            </el-table-column>
+                            <!-- 输入模式 -->
+                            <el-table-column prop="inputMode" v-bind:label="i18ns.deviceInfo.inputMode">
+                                <template scope="scope">
+                                    <span v-if="scope.row.inputMode==1">{{i18ns.deviceInfo.acInput}}</span>
+                                    <span v-else-if="scope.row.inputMode==2">{{i18ns.deviceInfo.dcInput}}</span>
+                                    <span v-else-if="scope.row.inputMode==3">{{i18ns.deviceInfo.acInputDcInput}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 型号 -->
+                            <el-table-column prop="model" v-bind:label="i18ns.deviceInfo.model">
+                            </el-table-column>
+                            <!-- 版本号 -->
+                            <el-table-column prop="version" v-bind:label="i18ns.deviceInfo.version">
+                            </el-table-column>
+                            <!-- 协议 -->
+                            <el-table-column prop="powerProtocol" v-bind:label="i18ns.deviceInfo.protocol">
+                                <template scope="scope">
+                                    <span v-if="scope.row.powerProtocol==='0'">PSMI</span>
+                                    <span v-else-if="scope.row.powerProtocol==='1'">PMBUS</span>
+                                    <span v-else>--</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 厂商 -->
+                            <el-table-column prop="manufacture" v-bind:label="i18ns.deviceInfo.manufacture">
+                            </el-table-column>
+                        </el-row>
+                    </el-table>
+                </el-collapse-item>
+                <!-- 风扇详细信息 -->
+                <el-collapse-item v-bind:title="i18ns.deviceInfo.fan" name="6">
+                    <el-table :data="deviceInfos.Fan">
+                        <el-row>
+                            <!-- 名称 -->
+                            <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
+                            </el-table-column>
+                            <!-- 健康状态 -->
+                            <el-table-column prop="healthState" v-bind:label="i18ns.deviceInfo.healthState">
+                                <template scope="scope">
+                                    <span v-if="scope.row.healthState==0">{{i18ns.deviceInfo.normal}}</span>
+                                    <span v-else-if="scope.row.healthState==-1">{{i18ns.deviceInfo.offline}}</span>
+                                    <span v-else-if="scope.row.healthState==-2">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.fault}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 在位信息 -->
+                            <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
+                                <template scope="scope">
+                                    <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 控制模式 -->
+                            <el-table-column prop="controlModel" v-bind:label="i18ns.deviceInfo.controlModel">
+                                <template scope="scope">
+                                    <span v-if="scope.row.controlModel=='0'">{{i18ns.deviceInfo.auto}}</span>
+                                    <span v-else-if="scope.row.controlModel=='1'">{{i18ns.deviceInfo.manual}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 转速百分比 -->
+                            <el-table-column v-bind:label="i18ns.deviceInfo.rotatePercent">
+                                <template scope="scope">
+                                    <span v-if="scope.row.controlModel=='0'">--</span>
+                                    <span v-else>{{scope.row.rotatePercent}}</span>
+                                </template>
+                            </el-table-column>
+                            <!-- 转速 -->
+                            <el-table-column prop="rotate" v-bind:label="i18ns.deviceInfo.rotate">
+                            </el-table-column>
+                        </el-row>
+                    </el-table>
+                </el-collapse-item>
                 <!-- Raid详细信息 -->
-                <el-collapse-item v-bind:title="i18ns.deviceInfo.raid" name="5">
+                <el-collapse-item v-bind:title="i18ns.deviceInfo.raid" name="7">
                     <el-table :data="deviceInfos.Raid">
                         <el-row>
                             <!-- 名称 -->
@@ -448,55 +483,26 @@
                         </el-row>
                     </el-table>
                 </el-collapse-item>
-                <!--Mezz卡详细信息-->
-                <el-collapse-item v-bind:title="i18ns.deviceInfo.Mezz" name="6">
-                    <el-table :data="deviceInfos.Mezz">
+                <!-- PCIE详细信息 -->
+                <el-collapse-item v-bind:title="i18ns.deviceInfo.PCIE" name="9">
+                    <el-table :data="deviceInfos.PCIE">
                         <el-row>
                             <!-- 名称 -->
                             <el-table-column prop="name" v-bind:label="i18ns.deviceInfo.name">
                             </el-table-column>
                             <!-- 健康状态 -->
-                            <el-table-column prop="mezzHealthStatus" v-bind:label="i18ns.deviceInfo.healthState">
+                            <el-table-column prop="pcieSsdCardHealthStatus" v-bind:label="i18ns.deviceInfo.healthState">
                                 <template scope="scope">
-                                    <span v-if="scope.row.mezzHealthStatus==1">{{i18ns.deviceInfo.normal}}</span>
-                                    <span v-else-if="scope.row.mezzHealthStatus==-2||scope.row.mezzHealthStatus==5">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-if="scope.row.pcieSsdCardHealthStatus==0">{{i18ns.deviceInfo.normal}}</span>
+                                    <span v-else-if="scope.row.pcieSsdCardHealthStatus==-2">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.fault}}</span>
                                 </template>
                             </el-table-column>
-                            <!--在位信息-->
-                            <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
-                                <template scope="scope">
-                                    <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else>{{i18ns.deviceInfo.installed}}</span>
-                                </template>
+                            <!-- 设备寿命 -->
+                            <el-table-column prop="pcieSsdCardLifeLeft" v-bind:label="i18ns.deviceInfo.pcieSsdCardLifeLeft">
                             </el-table-column>
-                            <!-- 描述 -->
-                            <el-table-column prop="mezzInfo" v-bind:label="i18ns.deviceInfo.description">
-                            </el-table-column>
-                            <!-- 位置信息 -->
-                            <el-table-column prop="mezzLocation" v-bind:label="i18ns.deviceInfo.locationInfo">
-                            </el-table-column>
-                            <!-- ETH网口MAC地址 -->
-                            <el-table-column prop="mezzETHMac" v-bind:label="i18ns.deviceInfo.ethMac">
-                            </el-table-column>
-                            <!-- IB网口MAC地址 -->
-                            <el-table-column prop="mezzIBMac" v-bind:label="i18ns.deviceInfo.ibMac">
-                            </el-table-column>
-                            <!-- FC网口WWPN -->
-                            <el-table-column prop="mezzFCWWPN" v-bind:label="i18ns.deviceInfo.fcWWPN">
-                            </el-table-column>
-                        </el-row>
-                    </el-table>
-                </el-collapse-item>
-                <!-- 网卡详细信息 -->
-                <el-collapse-item v-bind:title="i18ns.deviceInfo.NetworkCard" name="7">
-                    <el-table :data="deviceInfos.NetworkCard">
-                        <el-row>
-                            <!-- 网卡名称 -->
-                            <el-table-column prop="netWorkCardName" v-bind:label="i18ns.deviceInfo.netWorkCardName">
-                            </el-table-column>
-                            <!-- MAC地址 -->
-                            <el-table-column prop="macAdress" v-bind:label="i18ns.deviceInfo.macAdress">
+                            <!-- 厂商 -->
+                            <el-table-column prop="pciecardManufacturer" v-bind:label="i18ns.deviceInfo.manufacture">
                             </el-table-column>
                         </el-row>
                     </el-table>
@@ -513,20 +519,21 @@
                 name: '',
                 i18ns: {}, //国际化
                 activeNames: [],
-                isShowCpu: false,
-                isShowMemory: false,
-                isShowDisk: false,
                 motherBoard: [],
                 memoryHealthState: "",
-                normalCpu: 0,
-                faultCpu: 0,
-                unknownCpu: 0,
-                normalMemory: 0,
-                faultMemory: 0,
-                unknownMemory: 0,
+                isShowFan: false,
+                isShowPSU: false,
+                isShowBlade: false,
+                isShowDisk: false,
                 normalDisk: 0,
                 faultDisk: 0,
                 unknownDisk: 0,
+                normalPSU: 0,
+                faultPSU: 0,
+                unknownPSU: 0,
+                normalFan: 0,
+                faultFan: 0,
+                unknownFan: 0,
                 deviceInfos: {
                     dn: "",
                     ipAddress: "",
@@ -536,14 +543,11 @@
                     desc: "",
                     MemoryCapacity: "",
                     presentState: '',
-                    CPU: [],
-                    Memory: [],
                     Disk: [],
                     PSU: [],
                     Fan: [],
                     board: [],
                     Raid: [],
-                    NetworkCard: [],
                     PCIE: [],
                     Mezz: []
                 },
@@ -555,6 +559,7 @@
                     description: "",
                     status: "",
                     serverInfosStatus: "",
+                    serverType: "",
                     serverTypeCode: '',
                     childBlades: [],
                     model: "",
@@ -562,7 +567,7 @@
                     location: "",
                     type: "",
                     slotId: "",
-                },
+                }
             },
             created: function () {
                 /* 国际化方法 */
@@ -613,18 +618,16 @@
                         }
                     });
                 },
+
                 /**
                  *  返回按钮方法 
                  * **/
                 back: function () {
                     window.location.href = '../serverList/VServerList.html?s=' + Math.random()
                 },
-
-                /**
-                 * 获取刀片服务器的状态
-                 * **/
-                getBladeServerStatus: function () {
-                    var obj = document.getElementById('bladeServerStatusImage');
+                /* 获取服务器状态方法，根据返回值判断服务器状态，0为正常，-1为离线，-2为未知，其他为故障 */
+                getKunLunServerStatus: function () {
+                    var obj = document.getElementById('serverStatusImage');
                     if (this.serverInfos.status == 0) {
                         obj.style.backgroundColor = "limegreen";
                         this.serverInfos.serverInfosStatus = this.i18ns.deviceInfo.normal;
@@ -635,69 +638,6 @@
                         obj.style.backgroundColor = "red";
                         this.serverInfos.serverInfosStatus = this.i18ns.deviceInfo.fault;
                     }
-                },
-                /**
-                 *  获取cpu状态方法，根据返回值判断cpu状态*
-                 **/
-                getCpuStatus: function () {
-                    var obj = document.getElementById('Cpu');
-                    var cpuHealthState = [];
-                    var normalCpus = [];
-                    var faultCpus = [];
-                    var unknownCpus = [];
-                    for (var i = 0; i < this.deviceInfos.CPU.length; i++) {
-                        cpuHealthState.push(this.deviceInfos.CPU[i].healthState);
-                    }
-                    for (var j = 0; j < cpuHealthState.length; j++) {
-                        if (cpuHealthState[j] == 0) {
-                            normalCpus.push(cpuHealthState[j]);
-                        } else if (cpuHealthState[j] == -2) {
-                            unknownCpus.push(cpuHealthState[j]);
-                        } else if (cpuHealthState[j] != -1 && cpuHealthState[j] != 0 && cpuHealthState[j] != -2) {
-                            faultCpus.push(cpuHealthState[j]);
-                        }
-                    }
-                    this.normalCpu = normalCpus.length;
-                    this.faultCpu = faultCpus.length;
-                    this.unknownCpu = unknownCpus.length;
-                    var total = this.normalCpu + this.faultCpu + this.unknownCpu;
-                    if (normalCpus.length > 0 || faultCpus.length > 0 || unknownCpus.length > 0) {
-                        this.isShowCpu = true;
-                        this.draw('Cpu', this.normalCpu, this.faultCpu, this.unknownCpu);
-                    } else {
-                        this.isShowCpu = false;
-                    }
-                },
-                /* 获取内存状态 */
-                getMemoryStatus: function () {
-                    var obj = document.getElementById('Memory');
-                    var MemoryHealthState = [];
-                    var normalMemorys = [];
-                    var faultMemorys = [];
-                    var unknownMemorys = [];
-                    for (var i = 0; i < this.deviceInfos.Memory.length; i++) {
-                        MemoryHealthState.push(this.deviceInfos.Memory[i].healthState)
-                    }
-                    for (var j = 0; j < MemoryHealthState.length; j++) {
-                        if (MemoryHealthState[j] == 0) {
-                            normalMemorys.push(MemoryHealthState[j]);
-                        } else if (MemoryHealthState[j] == -2) {
-                            unknownMemorys.push(MemoryHealthState[j]);
-                        } else if (MemoryHealthState[j] != -1 && MemoryHealthState[j] != 0 && MemoryHealthState[j] != -2) {
-                            faultMemorys.push(MemoryHealthState[j]);
-                        }
-                    }
-                    this.normalMemory = normalMemorys.length;
-                    this.faultMemory = faultMemorys.length;
-                    this.unknownMemory = unknownMemorys.length;
-                    var total = this.normalMemory + this.faultMemory + this.unknownMemory;
-                    if (normalMemorys.length > 0 || faultMemorys.length > 0 || unknownMemorys.length > 0) {
-                        this.isShowMemory = true;
-                        this.draw('Memory', this.normalMemory, this.faultMemory, this.unknownMemory);
-                    } else {
-                        this.isShowMemory = false;
-                    }
-
                 },
                 /* 获取硬盘状态 */
                 getDiskStatus: function () {
@@ -729,55 +669,66 @@
                         this.isShowDisk = false;
                     }
                 },
-                /**
-                 * 处理获取到的MezzMac返回值，如果以;分割后不是以0开头，则返回“--”
-                 * 如果是0开头，则判断#的前一位数值，分别处理。
-                 * **/
-                asyInfo: function (str) {
-                    var obj = {
-                        mezzETHMac: [],
-                        mezzIBMac: [],
-                        mezzFCWWPN: []
+                /* 获取风扇状态 */
+                getFanStatus: function () {
+                    var fanHealthState = [];
+                    var normalFans = [];
+                    var faultFans = [];
+                    var unknownFans = [];
+                    for (var i = 0; i < this.deviceInfos.Fan.length; i++) {
+                        fanHealthState.push(this.deviceInfos.Fan[i].healthState);
                     }
-                    var strAry = str.split(';');
-                    if (strAry[0] == "0") {
-                        for (var index = 1; index < strAry.length; index++) {
-                            var element = strAry[index];
-                            var splitChar = element.indexOf("#");
-                            var t = element.charAt(splitChar - 1);
-                            var item = element.substr(splitChar + 1).replace(/:/g, "-");
-                            switch (t) {
-                                case "0":
-                                    obj.mezzETHMac.push(item);
-                                    break;
-                                case "1":
-                                    obj.mezzFCWWPN.push(item);
-                                    break;
-                                case "2":
-                                    obj.mezzIBMac.push(item);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        if (obj.mezzETHMac.length == 0) {
-                            obj.mezzETHMac = ['--']
-                        }
-                        if (obj.mezzIBMac.length == 0) {
-                            obj.mezzIBMac = ['--']
-                        }
-                        if (obj.mezzFCWWPN.length == 0) {
-                            obj.mezzFCWWPN = ['--']
+                    for (var j = 0; j < fanHealthState.length; j++) {
+                        if (fanHealthState[j] == 0) {
+                            normalFans.push(fanHealthState[j]);
+                        } else if (fanHealthState[j] == -2) {
+                            unknownFans.push(fanHealthState[j]);
+                        } else if (fanHealthState[j] != -1 && fanHealthState[j] != 0 && fanHealthState[j] != -2) {
+                            faultFans.push(fanHealthState[j]);
                         }
                     }
-                    return obj;
+                    this.normalFan = normalFans.length;
+                    this.faultFan = faultFans.length;
+                    this.unknownFan = unknownFans.length;
+                    var total = this.normalFan + this.faultFan + this.unknownFan;
+                    if (normalFans.length > 0 || faultFans.length > 0 || unknownFans.length > 0) {
+                        this.isShowFan = true;
+                        this.draw('Fan', this.normalFan, this.faultFan, this.unknownFan);
+                    } else {
+                        this.isShowFan = false;
+                    }
                 },
-                /**
-                 * 根据serverInfos.name返回值处理，取出后面数字，即槽位
-                 * **/
-                getLocation: function () {
-                    this.serverInfos.slotId = this.serverInfos.name.slice(5);
+                /* 获取电源状态 */
+                getPowerStatus: function () {
+                    var powerHealthState = [];
+                    var normalPSUS = [];
+                    var faultPSUS = [];
+                    var unknownPSUS = [];
+                    for (var i = 0; i < this.deviceInfos.PSU.length; i++) {
+                        powerHealthState.push(this.deviceInfos.PSU[i].healthState);
+                    }
+                    for (var j = 0; j < powerHealthState.length; j++) {
+                        if (powerHealthState[j] == 0) {
+                            normalPSUS.push(powerHealthState[j]);
+                        } else if (powerHealthState[j] == -2) {
+                            unknownPSUS.push(powerHealthState[j]);
+                        } else if (powerHealthState[j] != -1 && powerHealthState[j] != -2 && powerHealthState[j] != 0) {
+                            faultPSUS.push(powerHealthState[j]);
+                        }
+                    }
+                    this.normalPSU = normalPSUS.length;
+                    this.faultPSU = faultPSUS.length;
+                    this.unknownPSU = unknownPSUS.length;
+                    var total = this.normalPSU + this.faultPSU + this.unknownPSU;
+                    if (normalPSUS.length > 0 || faultPSUS.length > 0 || unknownPSUS.length > 0) {
+                        this.isShowPSU = true;
+                        this.draw('PSU', this.normalPSU, this.faultPSU, this.unknownPSU);
+                    } else {
+                        this.isShowPSU = false;
+                    }
                 },
+
+
                 /* 获取所有设备信息 */
                 getUnitsInfo: function () {
                     var dn = localStorage.getItem('dn')
@@ -796,23 +747,6 @@
                                     }
                                 }
                             }
-
-                            //内存在位信息判断
-                            if (data.Memory) {
-                                for (var i = 0; i < data.Memory.length; i++) {
-                                    if (data.Memory[i].presentState != '0') {
-                                        app.deviceInfos.Memory.push(data.Memory[i])
-                                    }
-                                }
-                            }
-                            //cpu在位信息判断
-                            if (data.CPU) {
-                                for (var i = 0; i < data.CPU.length; i++) {
-                                    if (data.CPU[i].presentState != '0') {
-                                        app.deviceInfos.CPU.push(data.CPU[i])
-                                    }
-                                }
-                            }
                             //硬盘在位信息判断
                             if (data.Disk) {
                                 for (var i = 0; i < data.Disk.length; i++) {
@@ -821,27 +755,7 @@
                                     }
                                 }
                             }
-                            //Mezz卡在位信息判断
-                            if (data.Mezz) {
-                                for (var i = 0; i < data.Mezz.length; i++) {
-                                    if (data.Mezz[i].presentState != '0' && data.Mezz[i].presentState != -2) {
-                                        var item = data.Mezz[i];
-                                        var obj = app.asyInfo(item.mezzMac);
-                                        item.mezzETHMac = obj.mezzETHMac.join(";");
-                                        item.mezzIBMac = obj.mezzIBMac.join(";");
-                                        item.mezzFCWWPN = obj.mezzFCWWPN.join(";");
-                                        app.deviceInfos.Mezz.push(item)
-                                    } else if (data.Mezz[i].presentState == -2) {
-                                        var item = data.Mezz[i];
-                                        var obj = app.asyInfo(item.mezzMac);
-                                        item.mezzETHMac = obj.mezzETHMac.join(";");
-                                        item.mezzIBMac = obj.mezzIBMac.join(";");
-                                        item.mezzFCWWPN = obj.mezzFCWWPN.join(";");
-                                        item.mezzHealthStatus = -2;
-                                        app.deviceInfos.Mezz.push(item)
-                                    }
-                                }
-                            }
+
                             //风扇在位信息判断
                             if (data.Fan) {
                                 for (var i = 0; i < data.Fan.length; i++) {
@@ -852,7 +766,6 @@
                             }
                             app.deviceInfos.board = data.board;
                             app.deviceInfos.PCIE = data.PCIE;
-                            app.deviceInfos.NetworkCard = data.NetworkCard;
                             app.deviceInfos.Raid = data.RAID;
                             app.serverInfos.ipAddress = data.ipAddress;
                             app.serverInfos.uuid = data.uuid;
@@ -865,11 +778,10 @@
                             app.serverInfos.bladeUuid = data.uuid;
                             app.serverInfos.name = data.name;
                         }
-                        app.getBladeServerStatus();
-                        app.getMemoryStatus();
-                        app.getCpuStatus();
+                        app.getKunLunServerStatus();
                         app.getDiskStatus();
-                        app.getLocation();
+                        app.getFanStatus();
+                        app.getPowerStatus();
                     })
 
                 },
