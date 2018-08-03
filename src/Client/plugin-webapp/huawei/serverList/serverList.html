@@ -100,18 +100,7 @@
                                     </el-table-column>
                                     <el-table-column v-bind:label="i18ns.deviceInfo.status" prop="status">
                                         <template scope="scope">
-                                            <template v-if="scope.row.status=='0'">
-                                                <div class="serverStatusImage" style="background-color:limegreen"></div>&nbsp;
-                                                <span>{{i18ns.serverList.serverNormal}}</span>
-                                            </template>
-                                            <template v-else-if="scope.row.status=='-2'">
-                                                <div class="serverStatusImage" style="background-color:royalblue"></div>&nbsp;
-                                                <span>{{i18ns.serverList.serverUnknown}}</span>
-                                            </template>
-                                            <template v-else>
-                                                <div class="serverStatusImage" style="background-color:red"></div>&nbsp;
-                                                <span>{{i18ns.serverList.serverFault}}</span>
-                                            </template>
+                                            <span>{{getHealthStausTxt(scope.row.status)}}</span>
                                         </template>
                                     </el-table-column>
                                     <el-table-column v-bind:label="i18ns.deviceInfo.mode" prop="mode">
@@ -127,18 +116,7 @@
                         </el-table-column>
                         <el-table-column prop="serverStatus" v-bind:label="i18ns.serverList.serverStatus">
                             <template scope="scope">
-                                <template v-if="scope.row.status=='0'">
-                                    <span>{{i18ns.serverList.serverNormal}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-1'">
-                                    <span>{{i18ns.serverList.serverOffline}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-2'">
-                                    <span>{{i18ns.serverList.serverUnknown}}</span>
-                                </template>
-                                <template v-else>
-                                    <span>{{i18ns.serverList.serverFault}}</span>
-                                </template>
+                                <span>{{getHealthStausTxt(scope.row.status)}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
@@ -155,18 +133,7 @@
                         </el-table-column>
                         <el-table-column prop="status" v-bind:label="i18ns.serverList.serverStatus">
                             <template scope="scope">
-                                <template v-if="scope.row.status=='0'">
-                                    <span>{{i18ns.serverList.serverNormal}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-1'">
-                                    <span>{{i18ns.serverList.serverOffline}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-2'">
-                                    <span>{{i18ns.serverList.serverUnknown}}</span>
-                                </template>
-                                <template v-else>
-                                    <span>{{i18ns.serverList.serverFault}}</span>
-                                </template>
+                                <span>{{getHealthStausTxt(scope.row.status)}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
@@ -189,15 +156,7 @@
                                     </el-table-column>
                                     <el-table-column v-bind:label="i18ns.deviceInfo.status" prop="status">
                                         <template scope="scope">
-                                            <template v-if="scope.row.status=='0'">
-                                                <span>{{i18ns.serverList.serverNormal}}</span>
-                                            </template>
-                                            <template v-else-if="scope.row.status=='-2'">
-                                                <span>{{i18ns.serverList.serverUnknown}}</span>
-                                            </template>
-                                            <template v-else>
-                                                <span>{{i18ns.serverList.serverFault}}</span>
-                                            </template>
+                                            <span>{{getHealthStausTxt(scope.row.status)}}</span>
                                         </template>
                                     </el-table-column>
                                     <el-table-column v-bind:label="i18ns.deviceInfo.mode" prop="type">
@@ -211,18 +170,7 @@
                         </el-table-column>
                         <el-table-column prop="serverStatus" v-bind:label="i18ns.serverList.serverStatus">
                             <template scope="scope">
-                                <template v-if="scope.row.status=='0'">
-                                    <span>{{i18ns.serverList.serverNormal}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-1'">
-                                    <span>{{i18ns.serverList.serverOffline}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-2'">
-                                    <span>{{i18ns.serverList.serverUnknown}}</span>
-                                </template>
-                                <template v-else>
-                                    <span>{{i18ns.serverList.serverFault}}</span>
-                                </template>
+                                <span>{{getHealthStausTxt(scope.row.status)}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
@@ -236,18 +184,7 @@
                         </el-table-column>
                         <el-table-column prop="status" v-bind:label="i18ns.serverList.serverStatus">
                             <template scope="scope">
-                                <template v-if="scope.row.status=='0'">
-                                    <span>{{i18ns.serverList.serverNormal}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-1'">
-                                    <span>{{i18ns.serverList.serverOffline}}</span>
-                                </template>
-                                <template v-else-if="scope.row.status=='-2'">
-                                    <span>{{i18ns.serverList.serverUnknown}}</span>
-                                </template>
-                                <template v-else>
-                                    <span>{{i18ns.serverList.serverFault}}</span>
-                                </template>
+                                <span>{{getHealthStausTxt(scope.row.status)}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="serverModel" v-bind:label="i18ns.deviceInfo.mode">
@@ -309,6 +246,12 @@
             this.searchKey = 'rack';
         },
         methods: {
+             /**
+                * 获取健康状态
+               **/
+               getHealthStausTxt: function (status) {
+                return getHealthTxt(status);
+            },
             expandShow: function (row, expanded) {
                 if (row.childBlades) {
                     this.getUnitsInfo(row, expanded, '1');
