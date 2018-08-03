@@ -421,10 +421,10 @@ function getFirmwareTypeList() {
                 { value: 'CHN', label: 'CNA&HBA&NIC&IB' },
                 { value: 'RAID', label: 'RAID' },
                 { value: 'HDD', label: 'HDD' },
-                { value: 'NVME', label: 'NVME' },
+               // { value: 'NVME', label: 'NVME' },
                 { value: 'NVDIMM', label: 'NVDIMM' },
                 { value: 'SSD', label: 'SSD' },
-                { value: 'OTHERS', label: 'Others' }
+                //{ value: 'OTHERS', label: 'Others' }
 
             ];
         }
@@ -440,10 +440,10 @@ function getFirmwareTypeList() {
         { value: 'CHN', label: 'CNA&HBA&NIC&IB' },
         { value: 'RAID', label: 'RAID' },
         { value: 'HDD', label: 'HDD' },
-        { value: 'NVME', label: 'NVME' },
+        //{ value: 'NVME', label: 'NVME' },
         { value: 'NVDIMM', label: 'NVDIMM' },
         { value: 'SSD', label: 'SSD' },
-        { value: 'OTHERS', label: '其他' }
+       // { value: 'OTHERS', label: '其他' }
 
     ];
 }
@@ -866,6 +866,7 @@ String.prototype.format = function(args) {
     return result;
 }
 
+
 //判断是否空对象 by Jacky on 2017-8-24
 function isEmptyObject(obj) {
 	if (JSON.stringify(obj) === "{}") {
@@ -915,4 +916,63 @@ function ExecuteAnynsMethod(param, methodName, isCheckParam, callback) {
 	}
 	var ayncResult = NetBound.execute(methodName, param);
 	ExecuteAnynsMethodOnlyHandlerPromise(ayncResult, callback);
+
+/**
+ * 部件健康状态
+ * @param {*} status 
+ */
+function getHealthTxt(status) {
+    console.log(status);
+    var lang = localStorage.getItem('lang');
+    switch (status.toString()) {
+        case "-1":
+            return lang == 'en' ? "Offline" : "离线";
+        case "-2":
+            return lang == 'en' ? "Unknown" : "未知";
+        case "0":
+            return lang == 'en' ? "Normal" : "正常";
+        case "2":
+        case "3":
+        case "5":
+        case "4":
+        case "6":
+        case "7":
+        case "8":
+            return lang == 'en' ? "Fault" : "故障";
+        default:
+            return lang == 'en' ? "Unknown" : "未知";
+    }
+}
+function StatusStatistics(list) {
+    var statistics = {
+        unknown: 0,
+        normal: 0,
+        fault: 0
+    }
+    for (var i = 0; i < list.length; i++) {
+        var status = list[i].healthState.toString();
+        switch (status) {
+            case "-1":
+                break;//离线不统计;
+            case "-2":
+                statistics.unknown++;
+                break;
+            case "0":
+                statistics.normal++;
+                break;
+            case "2":
+            case "3":
+            case "5":
+            case "4":
+            case "6":
+            case "7":
+            case "8":
+                statistics.fault++;
+                break;
+            default:
+                statistics.unknown++;
+                break;
+        }
+    }
+    return statistics;
 }
