@@ -712,7 +712,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                     <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                 </template>
                             </el-table-column>
@@ -748,7 +748,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                     <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                 </template>
                             </el-table-column>
@@ -784,7 +784,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                     <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                 </template>
                             </el-table-column>
@@ -814,7 +814,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                     <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                 </template>
                             </el-table-column>
@@ -872,7 +872,7 @@
                             <el-table-column prop="presentState" v-bind:label="i18ns.deviceInfo.installationStatus">
                                 <template scope="scope">
                                     <span v-if="scope.row.presentState==='0'">{{i18ns.deviceInfo.notInstalled}}</span>
-                                    <span v-else-if="scope.row.presentState==='2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
+                                    <span v-else-if="scope.row.presentState==='-2'||scope.row.presentState==='2'">{{i18ns.deviceInfo.unknown}}</span>
                                     <span v-else>{{i18ns.deviceInfo.installed}}</span>
                                 </template>
                             </el-table-column>

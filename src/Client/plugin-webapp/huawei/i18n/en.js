@@ -168,7 +168,9 @@ var i18n_en = {
         mountPointErrorMsg: 'Mount points cannot be empty!',
         mountPointErrorMsg1: 'Mount points cannot be repeated!',
         mountPointErrorMsg2: 'The mount point can contain a maximum of 255 characters. The value must start with a slash (/), followed by digits\, letters\, and underscores (_).',
-        viewDetail: 'View Template Details'
+        viewDetail: 'View Template Details',
+        extendSoftware:'Extension Software',
+        extendSoftwareTips:'iBMA can be used to query the versions of drivers and in-band firmware such as RAID controller cards and CNAs,and upgrade the drivers. Only V3 and V5 servers support this function.'
     },
 
     eSight: {
@@ -245,7 +247,8 @@ var i18n_en = {
         serverStoragenode: 'Storagenode',
         serverThirdpartyserver: 'Thirdpartyserver',
         cpuHealthState: 'CPU Health Status',
-        memoryHealthState: 'Memory Health Status'
+        memoryHealthState: 'Memory Health Status',
+        serverKunLun:'KunLun'
     },
     firmware: {
         clearFailedTask: 'Clear Failed Task',
@@ -527,7 +530,8 @@ var i18n_en = {
         bladeServer: "Blade Server",
         deviceModel: "Device Model",
         switchBoard: "Switch Board",
-        rackServer: 'Rack Server'
+        rackServer: 'Rack Server',
+        kunlunServer:'KunLun Server'
     }
 
 }
