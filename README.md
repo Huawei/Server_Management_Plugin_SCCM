@@ -8,7 +8,7 @@ I. General Information
 
     Name:     SCCM Plugin Pack for Huawei Server
     Category: Configuration
-    Version:  1.1.2
+    Version:  1.2.0
 
 
 II. Description
@@ -22,7 +22,7 @@ III.Supported Software Version
         
 IV.Software Requirements
 
-    eSight V300R008C00SPC201
+    eSight V300R009C00SPC201
     
 V. Supported Device
 
