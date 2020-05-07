@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,16 +7,15 @@
     <meta charset="utf-8" />
     <link href="../../css/element.css" rel="stylesheet" />
     <link href="../../css/style.css" rel="stylesheet" />
-    <script src="../../scripts/vue.js"></script>
+    <script src="../../scripts/vue.min.js"></script>
     <script src="../../scripts/element.js"></script>
-    <script src="../../scripts/jquery-2.1.3.min.js"></script>
+    <script src="../../scripts/jquery.min.js"></script>
     <script src="../../scripts/i18n/zh-CN.js"></script>
     <script src="../../scripts/i18n/en.js"></script>
     <script src="../i18n/zh-CN.js"></script>
     <script src="../i18n/en.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/errorCode.js"></script>
-    <script src="../../scripts/web-platform.js"></script>
     <script src="js/rest.js"></script>
     <script src="../../scripts/lodash.min.js"></script>
     <script src="../../scripts/polyfill.min.js"></script>
@@ -108,7 +107,7 @@
                         </el-table-column>
                         <el-table-column prop="syncStatusTxt" v-bind:label="i18ns.software.taskState">
                         </el-table-column>
-                        <el-table-column prop="errorDetail" v-bind:label="i18ns.software.detail_soft" :show-overflow-tooltip="true">
+                        <el-table-column prop="errorDetail" v-bind:label="i18ns.software.detail_soft" :show-overflow-tooltip="false">
                             <template scope="scope">
                                 <el-popover trigger="hover" placement="top">
                                     <div v-for="item in getErrorDetailTxt(scope.row.taskCode)">
@@ -584,7 +583,6 @@
                 resetType: function () {
                     this.commonfunc();
                     this.systemTypeValueChange(this.ruleForm.softwareType);
-                    this.versionTypeValueChange(this.ruleForm.softwareVersion);
                 },
                 /**
                  * 顶部添加操作
@@ -720,7 +718,7 @@
                     var list = softManager.getChildDropList(val);
                     this.versionTypeOptions = list;
                     this.ruleForm.softwareVersion = this.versionTypeOptions[0].value;
-                    console.log(list);
+                    this.versionTypeValueChange(this.ruleForm.softwareVersion);
                 },
                 /**
                  * 添加软件源弹出框 软件版本类型 切换操作
@@ -728,6 +726,8 @@
                  * @param {any} val 
                  */
                 versionTypeValueChange: function (val) {
+                    console.log("--------------------------",val)
+                    console.log(val)
                     this.softEditionOptions = [];
                     var list = softManager.getChildDropList(val);
                     if (list.length <= 0) {

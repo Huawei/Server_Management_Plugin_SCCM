@@ -10,7 +10,6 @@ namespace Huawei.SCCMPlugin.DAO
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
-        private const int NO_RS_CNT = -1;
         private string TableName
         {
             get
@@ -33,7 +32,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("InsertEntity Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 
@@ -69,7 +67,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("InsertEntitys Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 
@@ -88,7 +85,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("UpdateEntity Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 
@@ -107,7 +103,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("DeleteEntityById Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 
@@ -126,7 +121,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("GetEntityById Error:" + ex);
                 throw;
-                return default(T);
             }
         }
 
@@ -145,7 +139,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("GetList Error:" + ex);
                 throw;
-                return null;
             }
         }
         /// <summary>
@@ -176,7 +169,6 @@ namespace Huawei.SCCMPlugin.DAO
                 HWLogger.DEFAULT.Error("selSql:" + selSql);
                 HWLogger.DEFAULT.Error("GetList Error:" + ex);
                 throw;
-                return null;
             }
         }
 
@@ -212,7 +204,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("UpdateEntitys Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 
@@ -232,7 +223,6 @@ namespace Huawei.SCCMPlugin.DAO
             {
                 HWLogger.DEFAULT.Error("ExecuteSql Error:" + ex);
                 throw;
-                return NO_RS_CNT;
             }
         }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,15 +7,14 @@
     <meta charset="utf-8" />
     <link href="../../css/element.css" rel="stylesheet" />
     <link href="../../css/style.css" rel="stylesheet" />
-    <script src="../../scripts/vue.js"></script>
+    <script src="../../scripts/vue.min.js"></script>
     <script src="../../scripts/element.js"></script>
-    <script src="../../scripts/jquery-2.1.3.min.js"></script>
+    <script src="../../scripts/jquery.min.js"></script>
     <script src="../../scripts/i18n/zh-CN.js"></script>
     <script src="../../scripts/i18n/en.js"></script>
     <script src="../i18n/en.js"></script>
     <script src="../i18n/zh-CN.js"></script>
     <script src="../js/common.js"></script>
-    <script src="../../scripts/web-platform.js"></script>
     <script src="../js/errorCode.js"></script>
     <script src="js/rest.js"></script>
     <script src="../../scripts/lodash.min.js"></script>
@@ -128,7 +127,8 @@
         </el-form>
 
         <!--不包含WWNN选项的Advanced弹出窗口-->
-        <el-dialog v-bind:title="i18ns.template.advanced" size="small" :visible.sync="wwpnDialogVisible">
+        <!--Modify: 20200402  DTS2020033012300 点击Advanced按钮设置SAN Boot使能状态，从Enabled切换至Disabled，点击Cancel按钮不保存,点击Advanced重新进入后，SAN Boot为Enabled状态，但WWPN等设置框消失-->
+        <el-dialog  v-bind:title="i18ns.template.advanced" size="small" :visible.sync="wwpnDialogVisible" :before-close="wwpnCancel">
             <el-row style="margin-top:3px;">
                 <el-col v-bind:span="24">
                     <div class="nem_component_content_title">
@@ -313,7 +313,8 @@
         </el-dialog>
 
         <!--包含WWNN选项的Advanced弹窗-->
-        <el-dialog v-bind:title="i18ns.template.advanced" :visible.sync="wwnnDialogVisible" size="small">
+        <!--Modify: 20200402  DTS2020033012300 点击Advanced按钮设置SAN Boot使能状态，从Enabled切换至Disabled，点击Cancel按钮不保存,点击Advanced重新进入后，SAN Boot为Enabled状态，但WWPN等设置框消失-->
+        <el-dialog  v-bind:title="i18ns.template.advanced" :visible.sync="wwnnDialogVisible" size="small"  :before-close="wwnnCancel">
 
             <el-row style="margin-top:3px;margin-bottom:8px;">
                 <el-col v-bind:span="24">
@@ -896,8 +897,13 @@
                     this.wwpn.Target4TargetLUN = '';
                     this.wwpn.Target5TargetLUN = '';
                     this.wwpn.Target6TargetLUN = '';
-                    this.wwpn.Target7TargetLUN = '';
-                    this.wwpn.SANBoot = 'Enabled';
+                    this.wwpn.Target7TargetLUN = ''; 
+                    <!--Modify: 20200402  DTS2020033012300 点击Advanced按钮设置SAN Boot使能状态，从Enabled切换至Disabled，点击Cancel按钮不保存,点击Advanced重新进入后，SAN Boot为Enabled状态，但WWPN等设置框消失-->                  
+                    if (app.IsPort0Dialog) {
+                        this.wwpnItemsVisible = app.Port0.SANBoot !='Disabled' 
+                    } else {
+                        this.wwpnItemsVisible = app.Port1.SANBoot !='Disabled' 
+                    }
                 },
                 //包含wwnn选项的Advanced窗口退出方法，退出后所有内容清空
                 wwnnCancel: function() {
@@ -914,8 +920,15 @@
                     this.wwnn.Target01TargetLUN = '';
                     this.wwnn.Target02TargetLUN = '';
                     this.wwnn.Target03TargetLUN = '';
-                    this.wwnn.SANBoot = 'Enabled'
+                    <!--Modify: 20200402  DTS2020033012300 点击Advanced按钮设置SAN Boot使能状态，从Enabled切换至Disabled，点击Cancel按钮不保存,点击Advanced重新进入后，SAN Boot为Enabled状态，但WWPN等设置框消失-->
+                    if (app.IsPort0Dialog) {
+                        this.wwnnItemsVisible = app.Port0.SANBoot !='Disabled' 
+                    } else {
+                        this.wwnnItemsVisible = app.Port1.SANBoot !='Disabled'  
+                    }
+                           
                 },
+                
                 //不包含wwnn选项的窗口内容提交
                 wwpnSubmit: function(formName) {
                     this.$refs[formName].validate(function(valid) {

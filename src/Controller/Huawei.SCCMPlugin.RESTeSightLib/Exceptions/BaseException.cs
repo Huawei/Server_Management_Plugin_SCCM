@@ -51,6 +51,6 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Exceptions
         /// <summary>
         /// 错误消息
         /// </summary>
-        public string Message { get; set; }
+        public new string Message { get; set; }
     }
 }

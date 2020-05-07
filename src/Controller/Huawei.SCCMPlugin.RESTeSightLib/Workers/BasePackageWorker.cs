@@ -54,7 +54,6 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
         public string UploadBasePackage(BasePackage basePackage)
         {
             StringBuilder sb = new StringBuilder(ConstMgr.HWESightHost.URL_UPLOADE_BASEPACKAGE);
-            int retCode = 0;
             JObject jResult = ESSession.HCPost(sb.ToString(), basePackage);
             CheckAndThrowException(jResult);
             HWESightTask eSightTask = HWESightTaskDal.Instance.FindTaskByBasepackageName(this.ESSession.HWESightHost.ID, basePackage.BasepackageName);
@@ -165,7 +164,6 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
         private void SyncUploadPackageFromESight()
         {
             IList<HWESightTask> hwTaskList = HWESightTaskDal.Instance.FindCreatedTaskByType(this.ESSession.HWESightHost.ID, ConstMgr.HWESightTask.TASK_TYPE_FIRMWARE);
-            Exception lastException = null;
             foreach (HWESightTask hwTask in hwTaskList)
             {
                 try

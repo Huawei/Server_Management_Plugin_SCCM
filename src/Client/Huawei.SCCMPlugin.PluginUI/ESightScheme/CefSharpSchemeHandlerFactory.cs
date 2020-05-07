@@ -15,7 +15,7 @@ namespace Huawei.SCCMPlugin.PluginUI.ESightScheme
             if (schemeName == SchemeName && request.Url.EndsWith("CefSharp.Core.xml", System.StringComparison.OrdinalIgnoreCase))
             {
                 //Display the debug.log file in the browser
-                return ResourceHandler.FromFileName("CefSharp.Core.xml", ".xml");
+                return ResourceHandler.FromFilePath("CefSharp.Core.xml", ".xml");
             }
             return new CefSharpSchemeHandler();
         }

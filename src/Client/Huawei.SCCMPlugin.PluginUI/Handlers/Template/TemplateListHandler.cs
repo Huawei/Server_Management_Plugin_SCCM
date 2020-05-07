@@ -133,9 +133,12 @@ namespace Huawei.SCCMPlugin.PluginUI.Handlers
             ApiResult ret = new ApiResult(ConstMgr.ErrorCode.SYS_UNKNOWN_ERR, "");
             try
             {
-                LogUtil.HWLogger.UI.InfoFormat("Deleting template..., the param is [{0}]", JsonUtil.SerializeObject(eventData));
+                string jsonStr = JsonUtil.SerializeObject(eventData);
+                LogUtil.HWLogger.UI.InfoFormat("Deleting template..., the param is [{0}]", jsonStr);
                 //1. 获取UI传来的参数
-                var jsData          = eventData as Dictionary<string, object>;
+                if (string.IsNullOrEmpty(jsonStr))
+                    return ret;
+                Dictionary<string, Object> jsData = JsonConvert.DeserializeObject<Dictionary<string, Object>>(jsonStr);
                 string hostIP       = DictHelper.GetDicValue(jsData, "hostIP");
                 string templateName = DictHelper.GetDicValue(jsData, "templateName");
                 //2. 根据HostIP获取IESSession
@@ -150,14 +153,14 @@ namespace Huawei.SCCMPlugin.PluginUI.Handlers
             }
             catch (BaseException ex)
             {
-                LogUtil.HWLogger.UI.Error("Deleting template failed: ", ex);
+                LogUtil.HWLogger.UI.ErrorFormat("Deleting template failed: [{0}]", ex.ToString());
                 ret.Code         = string.Format("{0}{1}", ex.ErrorModel, ex.Code);
                 ret.Success      = false;
                 ret.ExceptionMsg = ex.Message;
             }
             catch (Exception ex)
             {
-                LogUtil.HWLogger.UI.Error("Deleting template failed: ", ex);
+                LogUtil.HWLogger.UI.ErrorFormat("Deleting template failed: [{0}]", ex.ToString());
                 ret.Code         = ConstMgr.ErrorCode.SYS_UNKNOWN_ERR;
                 ret.Success      = false;
                 ret.ExceptionMsg = ex.InnerException.Message ?? ex.Message;

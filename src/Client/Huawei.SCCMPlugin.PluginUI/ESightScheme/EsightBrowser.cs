@@ -12,7 +12,7 @@ namespace Huawei.SCCMPlugin.PluginUI.ESightScheme
     /// <summary>
     /// 定义ESight Browser
     /// </summary>
-    public partial class ESightBrowser : ChromiumWebBrowser, ICefBrowser
+    public partial class ESightBrowser : ChromiumWebBrowser
     {
         public ESightBrowser(string url) : base("huawei://plugin-webapp/" + url)
         {
@@ -45,18 +45,7 @@ namespace Huawei.SCCMPlugin.PluginUI.ESightScheme
             this.ExecuteScriptAsync(jsCode);
         }
 
-        /// <summary>
-        /// Registers the js object.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="boundName">Name of the bound.</param>
-        public void RegisterJsObject<T>(string boundName) where T : new()
-        {
-            this.RegisterJsObject(boundName, new T(), camelCaseJavascriptNames: true);
-        }
-     
         #endregion
-
         #region Events
 
         /// <summary>

@@ -107,7 +107,7 @@ namespace Huawei.SCCMPlugin.PluginUI.Views
             }
             catch (Exception ex)
             {
-                LogUtil.HWLogger.UI.Error("Error occurred when load url: ", ex);
+                LogUtil.HWLogger.UI.ErrorFormat("Error occurred when load url: [{0}]", ex.ToString());
             }
         }
 
@@ -144,7 +144,7 @@ namespace Huawei.SCCMPlugin.PluginUI.Views
         #region 未捕捉异常处理
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            LogUtil.HWLogger.UI.Error("CurrentDomain_UnhandledException", (Exception)e.ExceptionObject);
+            LogUtil.HWLogger.UI.ErrorFormat("CurrentDomain_UnhandledException:[{0}]", e.ExceptionObject.ToString());
         }
 
         private void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)

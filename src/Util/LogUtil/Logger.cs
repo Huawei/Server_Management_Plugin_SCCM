@@ -142,7 +142,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Log(object message, Exception e)
         {
-            log4.ErrorException(EncryptPassword(message), e);
+            log4.Error(EncryptPassword(message));
         }
         /// <summary>
         /// 输出错误日志 Debug 级别。
@@ -159,7 +159,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Debug(object msg, Exception ex)
         {
-            log4.DebugException(EncryptPassword(msg), ex);
+            log4.Debug(EncryptPassword(msg));
         }
         /// <summary>
         /// 输出错误日志 Debug 级别。
@@ -187,7 +187,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Info(object msg, Exception ex)
         {
-            log4.InfoException(EncryptPassword(msg), ex);
+            log4.Info(EncryptPassword(msg));
         }
         /// <summary>
         /// 输出错误日志 Info 级别。
@@ -216,7 +216,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Warn(object msg, Exception ex)
         {
-            log4.WarnException(EncryptPassword(msg), ex);
+            log4.Warn(EncryptPassword(msg));
         }
         /// <summary>
         /// 输出错误日志 Warn 级别。
@@ -245,7 +245,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Error(object msg, Exception ex)
         {
-            log4.ErrorException(EncryptPassword(msg), ex);
+            log4.Error(EncryptPassword(msg));
         }
         /// <summary>
         /// 输出错误日志 Error 级别。
@@ -274,7 +274,7 @@ namespace LogUtil
         /// <param name="ex">错误类</param>
         public void Fatal(object msg, Exception ex)
         {
-            log4.FatalException(EncryptPassword(msg), ex);
+            log4.Fatal(EncryptPassword(msg));
         }
         /// <summary>
         /// 输出错误日志 Fatal 级别。

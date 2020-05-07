@@ -417,6 +417,7 @@
     "deploy.error.10300320": "HBA卡配置错误。",
     "deploy.error.10300400": "CNA卡下的单个Port所属PF最小带宽之和不等于100。",
     "deploy.error.10300401": "CNA卡的PF vlan不在 2到4094之间。",
+    "deploy.error.10300402": "BIOS配置错误。ATS Support; Parity, Pass Through DMA Support, Enable C6, DCU Streamer Prefetcher, Turbo mode, Power saving(DEMT), Enhanced C-State(C1E), Stop Bits, , Baud Rate, Terminal Type, Quick Boot, Power policy, Boot Type, VT support(VMX), Data Bits, MLC Streamer Prefetcher, Set Boot Order, VT-D Support, Coherency Support, PCIe SR-IOV, OS ACPI Cx, Intel HT technology(Hyper-Threading), WakeOnLan(Wake on PME), Console Serial Redirect, NUMA, EIST support, DCU IP Prefetcher, Quiet Boot, Interrupt Remap 配置项配置失败，可能原因：BIOS版本不支持。",
 
 
 
@@ -889,6 +890,7 @@ var errorCode_en = {
         "deploy.error.10300320": "HBA card config error.",
         "deploy.error.10300400": "CNA card config bandwidth not equal to 100.",
         "deploy.error.10300401": "CNA card NIC PF vlan id not between 2 and 409</br>4.",
+        "deploy.error.10300402": "BIOS config error. ATS Support; Parity, Pass Through DMA Support, Enable C6, DCU Streamer Prefetcher, Turbo mode, Power saving(DEMT), Enhanced C-State(C1E), Stop Bits, , Baud Rate, Terminal Type, Quick Boot, Power policy, Boot Type, VT support(VMX), Data Bits, MLC Streamer Prefetcher, Set Boot Order, VT-D Support, Coherency Support, PCIe SR-IOV, OS ACPI Cx, Intel HT technology(Hyper-Threading), WakeOnLan(Wake on PME), Console Serial Redirect, NUMA, EIST support, DCU IP Prefetcher, Quiet Boot, Interrupt Remap configuration item(s) failed to be configured. Possible cause: The BIOS version is not supported.",
 
         "deploy.error.150100": "Database operation failed.",
 

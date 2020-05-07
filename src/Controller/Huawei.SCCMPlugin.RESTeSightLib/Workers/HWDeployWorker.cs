@@ -306,7 +306,6 @@ namespace Huawei.SCCMPlugin.RESTeSightLib.Workers
         /// <returns>完成的设备数量</returns>
         private int UpdateHWTaskResourceList(HWESightTask hwtask, DeployProgress deployProgress)
         {
-            bool isFinsihed = false;
             int finishedCnt = 0;
             IList<HWTaskResource> resourceList = HWTaskResourceDal.Instance.FindTaskResourceByTaskId(hwtask.ID);
             Dictionary<string, DeviceProgress> dviDict = new Dictionary<string, DeviceProgress>();

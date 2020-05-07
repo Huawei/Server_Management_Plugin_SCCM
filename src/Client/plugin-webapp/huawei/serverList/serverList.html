@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,16 +7,15 @@
     <meta charset="utf-8" />
     <link href="../../css/element.css" rel="stylesheet" />
     <link href="../../css/style.css" rel="stylesheet" />
-    <script src="../../scripts/vue.js"></script>
+    <script src="../../scripts/vue.min.js"></script>
     <script src="../../scripts/element.js"></script>
-    <script src="../../scripts/jquery-2.1.3.min.js"></script>
+    <script src="../../scripts/jquery.min.js"></script>
     <script src="../../scripts/i18n/zh-CN.js"></script>
     <script src="../../scripts/i18n/en.js"></script>
     <script src="../i18n/zh-CN.js"></script>
     <script src="../i18n/en.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/errorCode.js"></script>
-    <script src="../../scripts/web-platform.js"></script>
     <script src="js/rest.js"></script>
     <script src="../../scripts/lodash.min.js"></script>
     <script src="../../scripts/polyfill.min.js"></script>
@@ -88,7 +87,7 @@
 
                     <!--刀片服务器显示的table-->
                     <el-table v-show="searchKey=='blade'" v-bind:data="listData" border style="width: 100%" v-loading="loading" element-loading-text="Loading"
-                        @expand="expandShow">
+                        @expand-change="expandShow">
                         <el-table-column type="expand">
                             <template scope="props">
                                 <el-table :data="props.row.childBlades" style="width: 100%">
@@ -144,7 +143,7 @@
 
                     <!--高密服务器服务器显示的table-->
                     <el-table v-show="searchKey=='highdensity'" v-bind:data="listData" border style="width: 100%" v-loading="loading" element-loading-text="Loading"
-                        @expand="expandShow1">
+                        @expand-change="expandShow1">
                         <el-table-column type="expand">
                             <template scope="props">
                                 <el-table v-bind:data="props.row.childBlades" style="width: 100%">
@@ -252,14 +251,14 @@
                getHealthStausTxt: function (status) {
                 return getHealthTxt(status);
             },
-            expandShow: function (row, expanded) {
+               expandShow: function (row, expandedRows) {
                 if (row.childBlades) {
-                    this.getUnitsInfo(row, expanded, '1');
+                    this.getUnitsInfo(row, expandedRows, '1');
                 }
             },
-            expandShow1: function (row, expanded) {
+               expandShow1: function (row, expandedRows) {
                 if (row.childBlades) {
-                    this.getUnitsInfo(row, expanded, '2');
+                    this.getUnitsInfo(row, expandedRows, '2');
                 }
             },
             getUnitsInfo: function (v, bl, type) {

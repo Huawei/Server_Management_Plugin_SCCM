@@ -9,6 +9,7 @@ using Huawei.SCCMPlugin.PluginUI.Views;
 using System.Windows;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using CefSharp.WinForms;
 
 namespace Huawei.SCCMPlugin.PluginUI.Helper
 {
@@ -62,7 +63,7 @@ namespace Huawei.SCCMPlugin.PluginUI.Helper
                 {
                     LogUtil.HWLogger.UI.InfoFormat("init cefsharp...");
                     //Cef.EnableHighDPISupport();
-
+                    CefSharpSettings.LegacyJavascriptBindingEnabled = true;
                     CefSettings settings = new CefSettings()
                     {
                         CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -94,7 +95,7 @@ namespace Huawei.SCCMPlugin.PluginUI.Helper
                     //http://peter.sh/experiments/chromium-command-line-switches/
                     //settings.CefCommandLineArgs.Add("renderer-process-limit", "1");
                     settings.WindowlessRenderingEnabled = true;//Set to true (1) to enable windowless (off-screen) rendering support. Do not enable this value if the application does not use windowless rendering as it may reduce rendering performance on some systems.
-                    Cef.Initialize(settings, true, false);
+                    Cef.Initialize(settings);
                     //首次加载页面需要等待cef初始化完成
                     SafeInvoke(form, () => { form.JumpToPage(form.Url); });
 
